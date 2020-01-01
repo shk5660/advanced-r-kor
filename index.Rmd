@@ -1,13 +1,13 @@
 --- 
-title: "A Minimal Bookdown Book"
-author: "Sean Kross"
+title: "Advanced R in Korean"
+author: "Jsang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: seankross/bookdown-start
+github-repo: shk5660/advanced-r-kor
 url: 'http\://seankross.com/bookdown-start/'
 description: "Everything you need (and nothing more) to start a bookdown book."
 ---
