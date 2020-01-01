@@ -2,6 +2,6 @@ book_filename: "Advanced R in Korean"
 chapter_name: "Chapter "
 repo: https://github.com/shk5660/advanced-r-kor
 output_dir: docs
-rmd_files: ["index.Rmd", "01-Introduction.Rmd", "02-Diving-In.Rmd"]
+rmd_files: ["index.Rmd", "01-Introduction.Rmd", "02-Names-and-values.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
