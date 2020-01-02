@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Advanced R in Korean</title>
+  <title>Chapter 2 Names and values | Advanced R in Korean</title>
   <meta name="description" content="Everything you need (and nothing more) to start a bookdown book." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Advanced R in Korean" />
+  <meta property="og:title" content="Chapter 2 Names and values | Advanced R in Korean" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://seankross.com/bookdown-start/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="shk5660/advanced-r-kor" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Advanced R in Korean" />
+  <meta name="twitter:title" content="Chapter 2 Names and values | Advanced R in Korean" />
   
   <meta name="twitter:description" content="Everything you need (and nothing more) to start a bookdown book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="introduction.html"/>
 
-<link rel="next" href="introduction.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -161,27 +161,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Advanced R in Korean</h1>
-<p class="author"><em>Jsang</em></p>
-<p class="date"><em>2020-01-02</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
+<div id="names-values" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Names and values</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
+<p>R에서는 객체(object)와 이름(name)의 차이를 이해하는 것이 중요합니다. 이를 이해하게 된다면,</p>
 <ul>
-<li>공부삼아 Wickham의 Advanced R을 번역하는 프로젝트를 시작했습니다.</li>
-<li>경어체를 사용한 것은 순전히 본인의 취향입니다.</li>
-<li>번역이 어려운 부분은 원문 그대로 남겼고, 용어는 한/영을 병기했습니다.</li>
+<li>더 정확하게 코드의 성능과 메모리 사용을 예측할 수 있습니다.</li>
+<li>느린 코드의 주요 원인인 의도치 않은 복사를 피함으로써, 빠른 코드를 작성할 수 있습니다.</li>
+<li>R의 함수형 프로그래밍 툴에 대해 더욱 잘 이해할 수 있게 됩니다.</li>
 </ul>
+<p>이 챕터의 목표는 이름(names)과 값(values) 의 차이, 그리고 언제 R이 객체(object)를 복사하는지 이해하도록 돕는 것입니다.</p>
+<div id="quiz" class="section level3 unnumbered">
+<h3>Quiz</h3>
+<p>이 챕터를 넘겨도 될지 다음 문제를 통해 확인해보세요. 이 챕터 끝에 있는 Section 2.7에서 정답을 확인하실 수 있습니다.</p>
+<ol style="list-style-type: decimal">
+<li>주어진 데이터프레임에서, 어떻게 하면 <code>1</code>과 <code>2</code>의 합을 담고 있는 “3”이라는 컬럼을 만들 수 있을까요? <code>[[</code>는 사용하지 말고, <code>$</code>만 이용해보세요. <code>1</code>, <code>2</code>, 그리고 <code>3</code>을 변수명으로 사용하기 어렵게 만드는 것은 무엇인가요?</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">runif</span>(<span class="dv">3</span>), <span class="kw">runif</span>(<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>주어진 코드에서, <code>y</code>가 차지하는 메모리는 얼만큼인가요?</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e6</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">y &lt;-<span class="st"> </span><span class="kw">list</span>(x, x, x)</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>주어진 예시에서 <code>a</code>가 복사되는 순간은 몇번째 줄일까요?</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">b &lt;-<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb3-3" title="3">b[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+</div>
+<div id="outline" class="section level3 unnumbered">
+<h3>Outline</h3>
+<ul>
+<li><p>섹션 2.2는 이름(names)와 값(values)의 차이점을 소개하고, <code>&lt;-</code>가 어떻게 이름과 값 사이의 연결(binding)이나 참조(reference)를 만들어내는지 다룹니다.</p></li>
+<li><p>섹션 2.3은 R이 언제 ’복사’를 실행하는지 설명합니다. 벡터를 변형시킬때라면, 거의 대부분 새로운 변형된 벡터를 생성하는 것이라 볼 수 있습니다. <code>tracemem()</code> 을 사용해 언제 복사가 실제로 일어나는지 확인하는 법을 배웁니다. 그리고나면 이것들이 함수 실행, 리스트, 데이터프레임, 그리고 문자형 벡터들에 어떤 식으로 적용되는지 살펴볼 것입니다.</p></li>
+<li><p>섹션 2.4에서는 객체(object)가 얼마나 메모리를 차지하는지에 대해, 이전 두 섹터가 갖는 함의를 탐험하게 될 것입니다. 이에 대한 당신의 직관이 아마 꽤나 잘못되어 있을 것이고, 안타깝게도 <code>utils::object.size()</code>가 부정확하기에, <code>lobstr::obj_size()</code>를 사용하는 법을 배울 것입니다.</p></li>
+<li><p>섹션 2.5에선 ‘copy-on-modify’(* 후에 보다 자세히 다루겠지만 ‘변형을 할 때 복사가 일어난다’ 정도로 이해하면 될 것 같습니다)의 중요한 두가지 예외를 알아볼 것입니다. 환경(environments)과 하나의 이름을 갖는 값에 대해서, 객체는 place에서 변형됩니다.(* 추후 보충할 것)</p></li>
+<li><p>섹션 2.6에서는 더이상 이름으로 참조되지 않는 객체에 의해 사용되는 메모리를 비워주는, garbage collector에 대해 살펴보면서 챕터를 마치겠습니다.</p></li>
+</ul>
+</div>
+<div id="prerequisites" class="section level3 unnumbered">
+<h3>Prerequisites</h3>
+<p>우린 R 객체의 내부적 표현법을 자세히 살펴보기 위해 <a href="https://github.com/r-lib/lobstr">lobstr</a> 패키지를 사용할 것입니다.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(lobstr)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; Warning: 패키지 &#39;lobstr&#39;는 R 버전 3.6.2에서 작성되었습니다</span></a></code></pre></div>
+</div>
+</div>
+<div id="binding-basics" class="section level2">
+<h2><span class="header-section-number">2.2</span> Binding basics</h2>
+<p>이 코드를 한 번 봅시다.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a></code></pre></div>
+<p>이 코드는 <em>" x라는 이름으로, 1, 2, 3을 포함하는 객체를 만들어라. "</em> 라는 식으로 해석하기 쉽습니다.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
