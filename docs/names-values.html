@@ -24,7 +24,7 @@
 <meta name="author" content="Jsang" />
 
 
-<meta name="date" content="2020-01-02" />
+<meta name="date" content="2020-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -139,7 +139,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="names-values.html"><a href="names-values.html#outline"><i class="fa fa-check"></i>Outline</a></li>
 <li class="chapter" data-level="" data-path="names-values.html"><a href="names-values.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="names-values.html"><a href="names-values.html#binding-basics"><i class="fa fa-check"></i><b>2.2</b> Binding basics</a></li>
+<li class="chapter" data-level="2.2" data-path="names-values.html"><a href="names-values.html#binding-basics"><i class="fa fa-check"></i><b>2.2</b> Binding basics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="names-values.html"><a href="names-values.html#non-syntactic-names"><i class="fa fa-check"></i><b>2.2.1</b> Non-syntactic names</a></li>
+<li class="chapter" data-level="2.2.2" data-path="names-values.html"><a href="names-values.html#exercises"><i class="fa fa-check"></i><b>2.2.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="names-values.html"><a href="names-values.html#copy-on-modify"><i class="fa fa-check"></i><b>2.3</b> Copy-on-modify</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="names-values.html"><a href="names-values.html#tracemem"><i class="fa fa-check"></i><b>2.3.1</b> <code>tracemem()</code></a></li>
+<li class="chapter" data-level="2.3.2" data-path="names-values.html"><a href="names-values.html#function-calls"><i class="fa fa-check"></i><b>2.3.2</b> Function calls</a></li>
+<li class="chapter" data-level="2.3.3" data-path="names-values.html"><a href="names-values.html#lists"><i class="fa fa-check"></i><b>2.3.3</b> Lists</a></li>
+<li class="chapter" data-level="2.3.4" data-path="names-values.html"><a href="names-values.html#data-frames"><i class="fa fa-check"></i><b>2.3.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.3.5" data-path="names-values.html"><a href="names-values.html#character-vectors"><i class="fa fa-check"></i><b>2.3.5</b> Character vectors</a></li>
+<li class="chapter" data-level="2.3.6" data-path="names-values.html"><a href="names-values.html#exercises-1"><i class="fa fa-check"></i><b>2.3.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="names-values.html"><a href="names-values.html#summary"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -198,22 +210,212 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>섹션 2.2는 이름(names)와 값(values)의 차이점을 소개하고, <code>&lt;-</code>가 어떻게 이름과 값 사이의 연결(binding)이나 참조(reference)를 만들어내는지 다룹니다.</p></li>
 <li><p>섹션 2.3은 R이 언제 ’복사’를 실행하는지 설명합니다. 벡터를 변형시킬때라면, 거의 대부분 새로운 변형된 벡터를 생성하는 것이라 볼 수 있습니다. <code>tracemem()</code> 을 사용해 언제 복사가 실제로 일어나는지 확인하는 법을 배웁니다. 그리고나면 이것들이 함수 실행, 리스트, 데이터프레임, 그리고 문자형 벡터들에 어떤 식으로 적용되는지 살펴볼 것입니다.</p></li>
 <li><p>섹션 2.4에서는 객체(object)가 얼마나 메모리를 차지하는지에 대해, 이전 두 섹터가 갖는 함의를 탐험하게 될 것입니다. 이에 대한 당신의 직관이 아마 꽤나 잘못되어 있을 것이고, 안타깝게도 <code>utils::object.size()</code>가 부정확하기에, <code>lobstr::obj_size()</code>를 사용하는 법을 배울 것입니다.</p></li>
-<li><p>섹션 2.5에선 ‘copy-on-modify’(* 후에 보다 자세히 다루겠지만 ‘변형을 할 때 복사가 일어난다’ 정도로 이해하면 될 것 같습니다)의 중요한 두가지 예외를 알아볼 것입니다. 환경(environments)과 하나의 이름을 갖는 값에 대해서, 객체는 place에서 변형됩니다.(* 추후 보충할 것)</p></li>
+<li><p>섹션 2.5에선 ‘copy-on-modify’(@ 후에 보다 자세히 다루겠지만 ‘변형을 할 때 복사가 일어난다’ 정도로 이해하면 될 것 같습니다)의 중요한 두가지 예외를 알아볼 것입니다. 환경(environments)과 하나의 이름을 갖는 값에 대해서, 객체는 place에서 변형됩니다.(@ 추후 보충할 것)</p></li>
 <li><p>섹션 2.6에서는 더이상 이름으로 참조되지 않는 객체에 의해 사용되는 메모리를 비워주는, garbage collector에 대해 살펴보면서 챕터를 마치겠습니다.</p></li>
 </ul>
 </div>
 <div id="prerequisites" class="section level3 unnumbered">
 <h3>Prerequisites</h3>
 <p>우린 R 객체의 내부적 표현법을 자세히 살펴보기 위해 <a href="https://github.com/r-lib/lobstr">lobstr</a> 패키지를 사용할 것입니다.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(lobstr)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; Warning: 패키지 &#39;lobstr&#39;는 R 버전 3.6.2에서 작성되었습니다</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(lobstr)</a></code></pre></div>
 </div>
 </div>
 <div id="binding-basics" class="section level2">
 <h2><span class="header-section-number">2.2</span> Binding basics</h2>
 <p>이 코드를 한 번 봅시다.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a></code></pre></div>
-<p>이 코드는 <em>" x라는 이름으로, 1, 2, 3을 포함하는 객체를 만들어라. "</em> 라는 식으로 해석하기 쉽습니다.</p>
+<p>이 코드는 <em>" x라는 이름으로, 1, 2, 3을 포함하는 객체를 만들어라. "</em> 라는 식으로 해석하기 쉽습니다. 만약 이런 식으로 이해한다면, 아쉽게도 R이 수면 아래에서 실제로 어떤식으로 동작하는지에 대해 부정확하게 예측하게 됩니다. 위의 해석보다는 아래의 두가지 액션을 취한다고 말하는 것이 보다 정확합니다.</p>
+<ul>
+<li><code>c(1, 2, 3)</code>이라는 값들의 벡터인 객체를 만듭니다.</li>
+<li>그리고 이 객체를 <code>x</code>라고 하는 이름과 연결시킵니다.</li>
+</ul>
+<p>즉, 객체나 값은 이름을 갖는 것이 아닙니다. 실제론 이름이 값을 갖는 것입니다.</p>
+<p>이 차이를 명확히 하기 위해, 그림을 하나 그려보겠습니다.</p>
+<p><img src="diagrams/name-value/binding-1.png" style="display: block; margin: auto;" /></p>
+<p><code>x</code>라고 하는 이름은, 둥근 모서리로 된 사각형으로 표현되고 있습니다. 그리고 얘는 벡터 <code>c(1, 2, 3)</code>이라는 값을 가리키는(또는 묶어주는, 또는 참조하는) 화살표를 갖고 있습니다. 이 화살표는 할당 연산자인 <code>&lt;-</code>와는 반대 방향을 가리키고 있는데, <code>&lt;-</code>는 왼쪽에 있는 이름을 오른쪽에 있는 객체로 묶어(binding)줍니다.</p>
+<p>다시 말해, 이름(name)을 값(value)에 대한 참조(reference)로 생각해도 무방합니다.(@ 참조라는 말이 잘 와닿진 않는데 ‘주소’ 정도로 이해해도 괜찮으려나?) 예를 들어, 아래 코드를 실행하면 <code>c(1, 2, 3)</code>을 복사하지 않습니다. 그저 이미 존재하고 있던 객체에 대한 다른 ’주소’가 생겨날 뿐입니다.(@ 실존하는 하나의 집을, 여러 종류의 주소로 표현할 수 있는 것과 비슷한 느낌)</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">y &lt;-<span class="st"> </span>x</a></code></pre></div>
+<p><img src="diagrams/name-value/binding-2.png" style="display: block; margin: auto;" /></p>
+<p>아마 <code>c(1, 2, 3)</code>에 <code>0x74b</code>라는 라벨이 붙어있는 것을 발견하셨을 겁니다. 벡터가 이름을 갖진 않지만, 바인딩과는 독립적으로 객체를 참조해야 할 때가 있습니다. 이를 위해, 값에 고유한 식별자(ID)를 부여한 것입니다. 이 ID는 객체의 메모리 ’주소’처럼 생긴 특별한 형식을 가지고 있습니다. 주소라함은 객체가 저장된 메모리의 위치이기 때문입니다. 하지만 실제 메모리 주소는 코드를 실행할 때마다 변하기 때문에, 대신 ID를 사용하기로 합니다.</p>
+<p><code>lobstr::obj_addr()</code>을 이용해 객체의 ID에 접근할 수 있습니다. 실제로 사용해보면 <code>x</code>와 <code>y</code>가 같은 ID를 가리키고 있음을 볼 수 있습니다.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">obj_addr</span>(x)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; [1] &quot;0x15f44208&quot;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">obj_addr</span>(y)</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; [1] &quot;0x15f44208&quot;</span></a></code></pre></div>
+<p>이 ID들은 길고 R을 재시작할 때마다 바뀝니다.</p>
+<p>이름과 값의 차이를 이해하는 데에는 시간이 좀 걸릴 겁니다. 하지만 이해하고나면, 함수형 프로그래밍에 있어 크게 도움이 됩니다. 다른 맥락에서 다른 이름을 가지는 함수들에 대해서 말이죠.</p>
+<div id="non-syntactic-names" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Non-syntactic names</h3>
+<p>R은 유효한 이름에 대해 엄격한 기준을 갖고 있습니다. <strong>문법적으로 올바른(syntactic)</strong> 이름은 반드시 글자, 숫자, <code>.</code>, 그리고 <code>_</code>로 이루어져야 하며, <code>_</code>나 숫자로 시작할 수 없습니다. 또한 <code>TRUE</code>, <code>NULL</code>, <code>if</code>, 그리고 <code>function</code>과 같은 <strong>예약어(reserved words)</strong>는 사용할 수 없습니다.(@ 예약어는 R에서 이미 사용되고 있는 단어들이라고 볼 수 있겠습니다) 이 규칙들을 따르지 않는 이름을 <strong>non-syntactic</strong>한 이름이라고 하며, 만약 이를 사용하려고 하면 에러가 납니다.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">_abc &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; Error: unexpected input in &quot;_&quot;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="cf">if</span> &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; Error: unexpected assignment in &quot;if &lt;-&quot;</span></a></code></pre></div>
+<p>이 규칙들을 어기고 어떤 이름이든 사용하는 것도 가능은 합니다. 어떤 종류의 문자열이든 backticks로 감싸주면 됩니다.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="st">`</span><span class="dt">_abc</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">`</span><span class="dt">_abc</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="st">`</span><span class="dt">if</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="st">`</span><span class="dt">if</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; [1] 10</span></a></code></pre></div>
+<p>보통 의도적으로 이런 요상한 이름들을 만들 일은 거의 없겠지만, R 외부에서 만들어진 데이터를 불러올 때 이런 이름들을 흔히 마주칠 수 있기 때문에, 이를 이해할 필요가 있습니다.</p>
+</div>
+<div id="exercises" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>의 관계를 설명해보세요.</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb10-2" title="2">b &lt;-<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb10-3" title="3">c &lt;-<span class="st"> </span>b</a>
+<a class="sourceLine" id="cb10-4" title="4">d &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>아래 코드는 평균 함수에 여러 방식으로 접근하고 있습니다. 이들은 전부 동일한 함수 객체를 가르키고 있는 것일까요? <code>lobstr::obj_addr()</code>을 이용해 확인해보세요.</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">mean</a>
+<a class="sourceLine" id="cb11-2" title="2">base<span class="op">::</span>mean</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">get</span>(<span class="st">&quot;mean&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="kw">evalq</span>(mean)</a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="kw">match.fun</span>(<span class="st">&quot;mean&quot;</span>)</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><p>디폴트로, <code>read.csv</code> 같은 R의 기본 데이터 불러오기 함수는, 자동으로 non-syntactic한 이름들을 syntactic하게 바꿉니다. 이게 왜 문제가 될 수 있을까요? 이런 행태를 억제할 수 있게 해주는 옵션은 무엇인가요?</p></li>
+<li><p>non-syntactic한 이름을 syntactic하게 변환하기 위해 <code>make.names()</code>가 사용하는 규칙은 무엇입니까?</p></li>
+<li><p>저는 syntactic한 이름을 결정짓는 규칙을 조금 단순화해서 설명했습니다. 왜 <code>.123e1</code>은 syntactic한 이름이 아닐까요? 자세히 알기 위해 <code>?makes.names</code>를 읽어보세요.</p></li>
+</ol>
+</div>
+</div>
+<div id="copy-on-modify" class="section level2">
+<h2><span class="header-section-number">2.3</span> Copy-on-modify</h2>
+<p>아래 코드를 살펴봅시다. 이것은 <code>x</code>와 <code>y</code>를 동일한 수면 밑 값과 묶어줍니다. 그리고 <code>y</code>를 변형합니다.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb12-2" title="2">y &lt;-<span class="st"> </span>x</a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4">y[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb12-5" title="5">x</a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; [1] 1 2 3</span></a></code></pre></div>
+<p><code>y</code>를 변형하는 것은 분명히 <code>x</code>는 변형시키지 않습니다. 그럼 공유된 연결성에는 무슨 일이 일어날까요? <code>y</code>와 연관된 값은 변하지만, 원본 객체는 그렇지 않습니다. 대신에, R은 <code>0x74b</code>의 값을 하나 바꾼 <code>0xcd2</code>라는 새로운 복사본을 만들고, <code>y</code>와 다시 연결시켜 줍니다.</p>
+<p><img src="diagrams/name-value/binding-3.png" style="display: block; margin: auto;" /></p>
+<p>이런 현상을 <strong>copy-on-modify</strong>라고 부릅니다. 이를 이해한다면 R 코드 성능에 대한 직관이 굉장히 향상될 것입니다. 이 행태를 설명하는 다른 표현으로, R 객체는 변경할 수 없다(unchangeable), 또는 <strong>불변하다(immutable)</strong> 등이 있겠습니다. 그러나 전 이런 용어는 대체로 쓰지 않으려고 하는데, 섹션 2.5에서 배우게 될 copy-on-modify의 중요한 예외사항들이 있기 때문입니다.</p>
+<p>copy-on-modify에 대해 탐험하려고 할 때, RStudio 내에서는 다른 결과들을 얻게 될 수 있다는 것에 유의하세요. 이건 환경창(environment pane)이 각 객체들에 대한 정보를 보여주기 위해, 각 객체에 대한 참조를 만들어야만 하기 때문입니다. 이는 당신의 인터엑티브한 탐험을 왜곡시킬 수 있지만, 함수 내부에 있는 코드들엔 영향을 미치지 않습니다. 때문에 데이터 분석을 하는 동안에는 성능에 영향도 없습니다. 실험을 위해서라면, 터미널에서 R을 직접 실행하거나, RMarkdown을 이용하는 것을 추천드립니다.</p>
+<div id="tracemem" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> <code>tracemem()</code></h3>
+<p><code>base::tracemem()</code>의 도움을 받아 객체가 언제 복사되는지 볼 수 있습니다. 한 번 이 함수를 어떤 객체로 실행하면, 이 갳체의 최근 주소를 받아볼 수 있습니다.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">cat</span>(<span class="kw">tracemem</span>(x), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="co">#&gt; &lt;0x7f80c0e0ffc8&gt; </span></a></code></pre></div>
+<p>함수를 실행하고나서 객체가 복사될 때마다 <code>tracemem()</code>이 복사된 객체, 그것의 새 주소와 복사를 일으킨 호출 순서를 알려줄 것입니다.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">y &lt;-<span class="st"> </span>x</a>
+<a class="sourceLine" id="cb14-2" title="2">y[[<span class="dv">3</span>]] &lt;-<span class="st"> </span>4L</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co">#&gt; tracemem[0x7f80c0e0ffc8 -&gt; 0x7f80c4427f40]: </span></a></code></pre></div>
+<p>만약 <code>y</code>를 다시 변경하면, 복사는 일어나지 않습니다. 이는 새로운 객체가 이제 오직 하나의 이름에 연결되어 있기에, R이 modify-in-place를 적용하기 때문입니다. 이것에 대해선 섹션 2.5에서 다시 알아봅시다.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">y[[<span class="dv">3</span>]] &lt;-<span class="st"> </span>5L</a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">untracemem</span>(x)</a></code></pre></div>
+<p><code>untracemem()</code>은 <code>tracemem()</code>과 반대로, 추적을 종료해줍니다.</p>
+</div>
+<div id="function-calls" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Function calls</h3>
+<p>함수를 호출할 때에도 동일한 복사 규칙이 적용됩니다. 코드를 봅시다.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">f &lt;-<span class="st"> </span><span class="cf">function</span>(a) {</a>
+<a class="sourceLine" id="cb16-2" title="2">  a</a>
+<a class="sourceLine" id="cb16-3" title="3">}</a>
+<a class="sourceLine" id="cb16-4" title="4"></a>
+<a class="sourceLine" id="cb16-5" title="5">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="kw">cat</span>(<span class="kw">tracemem</span>(x), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt; &lt;00000000191490C0&gt;</span></a>
+<a class="sourceLine" id="cb16-8" title="8"></a>
+<a class="sourceLine" id="cb16-9" title="9">z &lt;-<span class="st"> </span><span class="kw">f</span>(x)</a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co"># there&#39;s no copy here!</span></a>
+<a class="sourceLine" id="cb16-11" title="11"></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="kw">untracemem</span>(x)</a></code></pre></div>
+<p><code>f()</code>이 실행되는 동안, 함수 내부의 <code>a</code>는 함수 외부의 <code>x</code>와 같은 값을 가리키게 됩니다.</p>
+<p><img src="diagrams/name-value/binding-f1.png" style="display: block; margin: auto;" /></p>
+<p>그림에서 나타난 표현법에 대해서는 섹션 7.4.4에서 더 배우게 될 것입니다. 간략히 설명하자면, 함수 <code>f()</code>는 오른편 노란색 객체로 표현되었습니다. 이 함수의 argument인 <code>a</code>는 함수가 실행될 때, 실행 환경(회색 박스)에서 바인딩(검은 점선)이 됩니다.</p>
+<p><code>f()</code>가 완료되면, <code>x</code>와 <code>z</code>는 같은 객체를 가리키게 됩니다. <code>0x74b</code>는 한 번도 복사되지 않았는데, 변형된 적이 없기 때문입니다. 만약 <code>f()</code>가 <code>x</code>를 변형시키는 함수였다면, R는 새로운 복사본을 만들었을 것이고, 그리고 나서 <code>z</code>가 그 객체와 연결되었을 겁니다.</p>
+<p><img src="diagrams/name-value/binding-f2.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lists" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Lists</h3>
+<p>값을 가리키는 것은 이름(즉, 변수)만이 아닙니다. 리스트의 원소 역시 동일한 역할을 합니다. 이 리스트는 표면적으로 봤을 때, 위에 나왔던 숫자형 벡터와 매우 비슷합니다.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">l1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a></code></pre></div>
+<p>이 리스트는 사실 벡터보단 더 복잡한데, 값 자체를 저장하는 것이 아니라, 값에 대한 참조값들(주소들)을 저장하기 때문입니다.</p>
+<p><img src="diagrams/name-value/list.png" style="display: block; margin: auto;" /></p>
+<p>이 사실은 리스트를 변형하려 할 때 특히 중요하게 작용합니다.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">l2 &lt;-<span class="st"> </span>l1</a></code></pre></div>
+<p><img src="diagrams/name-value/l-modify-1.png" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">l2[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="dv">4</span></a></code></pre></div>
+<p><img src="diagrams/name-value/l-modify-2.png" style="display: block; margin: auto;" /></p>
+<p>벡터와 마찬가지로, 리스트도 copy-on-modify 성질을 사용합니다. 원본 리스트는 변하지 않은채 남겨져 있고, 변형된 새 복사본을 만들어 냅니다. 하지만 이는 <strong>얕은</strong> 복사입니다. <strong>얕은</strong>이라고 표현한 것은, 리스트 객체와 해당 바인딩들은 복사되지만, 바인딩이 가리키고 있는 값들은 복사되지 않기 때문입니다. 얕은 복사의 반대는 깊은 복사인데, 이는 모든 참조값들이 복사됩니다. R 3.1.0 버전 이전에는 모든 복사가 깊은 복사였습니다.</p>
+<p>리스트들 간에 공유되는 값들을 보려면, <code>lobstr::ref()</code>를 사용하면 됩니다. <code>ref()</code>는 각 객체의 메모리 주소를 로컬 ID와 함께 출력해주기 때문에, 공유된 요소들을 쉽게 상호 참조할 수 있습니다.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">ref</span>(l1, l2)</a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="co">#&gt; o [1:0x19a6f4a8] &lt;list&gt; </span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="co">#&gt; +-[2:0x19a3d1c0] &lt;dbl&gt; </span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="co">#&gt; +-[3:0x19a3d188] &lt;dbl&gt; </span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="co">#&gt; \-[4:0x19a3d150] &lt;dbl&gt; </span></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="co">#&gt;  </span></a>
+<a class="sourceLine" id="cb20-7" title="7"><span class="co">#&gt; o [5:0x1a3a3538] &lt;list&gt; </span></a>
+<a class="sourceLine" id="cb20-8" title="8"><span class="co">#&gt; +-[2:0x19a3d1c0] </span></a>
+<a class="sourceLine" id="cb20-9" title="9"><span class="co">#&gt; +-[3:0x19a3d188] </span></a>
+<a class="sourceLine" id="cb20-10" title="10"><span class="co">#&gt; \-[6:0x1a37c500] &lt;dbl&gt;</span></a></code></pre></div>
+</div>
+<div id="data-frames" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Data frames</h3>
+<p>데이터프레임은 벡터들의 리스트입니다. 때문에 데이터프레임을 변형할 때도 copy-on-modify가 중요한 결과를 불러옵니다. 예시로 이 데이터프레임을 봅시다.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">d1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</a></code></pre></div>
+<p><img src="diagrams/name-value/dataframe.png" style="display: block; margin: auto;" /></p>
+<p>만약 열을 변형한다면, 오직 해당 열만 변형되면 됩니다. 다른 열들은 그대로 원래 참조값들을 가리키면 되는 것입니다.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">d2 &lt;-<span class="st"> </span>d1</a>
+<a class="sourceLine" id="cb22-2" title="2">d2[, <span class="dv">2</span>] &lt;-<span class="st"> </span>d2[, <span class="dv">2</span>] <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<p><img src="diagrams/name-value/d-modify-c.png" style="display: block; margin: auto;" /></p>
+<p>하지만 만약 행을 변형한다면, 모든 열이 바뀝니다. 다시 말해 모든 열이 복사되어야 합니다.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">d3 &lt;-<span class="st"> </span>d1</a>
+<a class="sourceLine" id="cb23-2" title="2">d3[<span class="dv">1</span>, ] &lt;-<span class="st"> </span>d3[<span class="dv">1</span>, ] <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<p><img src="diagrams/name-value/d-modify-r.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="character-vectors" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Character vectors</h3>
+<p>R이 참조를 사용하는 마지막 장소는 바로 문자형 벡터입니다. 전 보통 문자형 벡터들을 이런 식으로 표현합니다.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;d&quot;</span>)</a></code></pre></div>
+<p><img src="diagrams/name-value/character.png" style="display: block; margin: auto;" /></p>
+<p>하지만 이건 좀 예의바른 예시입니다. R은 실제로 <strong>global string pool</strong>을 이용하는데, 문자형 벡터의 각 요소들이 고유한 문자 풀에 대한 포인터가 됩니다.</p>
+<p><img src="diagrams/name-value/character-2.png" style="display: block; margin: auto;" /></p>
+<p><code>ref()</code>의 <code>character</code> 변수를 <code>TRUE</code>로 세팅하면 이 참조값들을 볼 수 있습니다.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">ref</span>(x, <span class="dt">character =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="co">#&gt; o [1:0x189d22a0] &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="co">#&gt; +-[2:0x12f37598] &lt;string: &quot;a&quot;&gt; </span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="co">#&gt; +-[2:0x12f37598] </span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="co">#&gt; +-[3:0x180ca668] &lt;string: &quot;abc&quot;&gt; </span></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="co">#&gt; \-[4:0x13135230] &lt;string: &quot;d&quot;&gt;</span></a></code></pre></div>
+<p>이는 문자형 벡터가 차지하는 메모리 사용량에 큰 영향을 미치는데, 일반적으로 그리 중요하진 않으므로, 책의 다른 부분에서는 문자열이 벡터 내부에 있는 것처럼 문자형 벡터를 표현할 것입니다.</p>
+</div>
+<div id="exercises-1" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>왜 <code>tracemem(1:10)</code>은 별로 쓸모가 없습니까?</p></li>
+<li><p>이 코드를 실행했을 때, 왜 <code>tracemem()</code>이 복사를 두번 보여주는지 설명해보세요. 힌트: 이 코드와 이전 내용에서 등장했던 코드의 차이점을 유심히 살펴보세요.</p></li>
+</ol>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 2L, 3L)</a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">tracemem</span>(x)</a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4">x[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="dv">4</span></a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>주어진 객체들간의 관계를 그려보세요.</li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb27-2" title="2">b &lt;-<span class="st"> </span><span class="kw">list</span>(a, a)</a>
+<a class="sourceLine" id="cb27-3" title="3">c &lt;-<span class="st"> </span><span class="kw">list</span>(b, a, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>이 코드를 실행하면 무슨 일이 일어날까요?</li>
+</ol>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb28-2" title="2">x[[<span class="dv">2</span>]] &lt;-<span class="st"> </span>x</a></code></pre></div>
+<p>그림을 그려보세요.</p>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">2.4</span> Summary</h2>
 
 </div>
 </div>
