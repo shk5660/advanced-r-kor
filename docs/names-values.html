@@ -24,11 +24,7 @@
 <meta name="author" content="Jsang" />
 
 
-<<<<<<< HEAD
 <meta name="date" content="2020-01-08" />
-=======
-<meta name="date" content="2020-01-04" />
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,10 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="names-values.html"><a href="names-values.html#character-vectors"><i class="fa fa-check"></i><b>2.3.5</b> Character vectors</a></li>
 <li class="chapter" data-level="2.3.6" data-path="names-values.html"><a href="names-values.html#exercises-1"><i class="fa fa-check"></i><b>2.3.6</b> Exercises</a></li>
 </ul></li>
-<<<<<<< HEAD
 <li class="chapter" data-level="2.4" data-path="names-values.html"><a href="names-values.html#summary"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
-=======
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -256,28 +249,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>R은 유효한 이름에 대해 엄격한 기준을 갖고 있습니다. <strong>문법적으로 올바른(syntactic)</strong> 이름은 반드시 글자, 숫자, <code>.</code>, 그리고 <code>_</code>로 이루어져야 하며, <code>_</code>나 숫자로 시작할 수 없습니다. 또한 <code>TRUE</code>, <code>NULL</code>, <code>if</code>, 그리고 <code>function</code>과 같은 <strong>예약어(reserved words)</strong>는 사용할 수 없습니다.(@ 예약어는 R에서 이미 사용되고 있는 단어들이라고 볼 수 있겠습니다) 이 규칙들을 따르지 않는 이름을 <strong>non-syntactic</strong>한 이름이라고 하며, 만약 이를 사용하려고 하면 에러가 납니다.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">_abc &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; Error: unexpected input in &quot;_&quot;</span></a>
-<<<<<<< HEAD
 <a class="sourceLine" id="cb8-3" title="3"></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="cf">if</span> &lt;-<span class="st"> </span><span class="dv">10</span></a>
 <a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; Error: unexpected assignment in &quot;if &lt;-&quot;</span></a></code></pre></div>
-=======
-<a class="sourceLine" id="cb8-3" title="3"><span class="cf">if</span> &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; Error: unexpected assignment in &quot;if &lt;-&quot;</span></a></code></pre></div>
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
 <p>이 규칙들을 어기고 어떤 이름이든 사용하는 것도 가능은 합니다. 어떤 종류의 문자열이든 backticks로 감싸주면 됩니다.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="st">`</span><span class="dt">_abc</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="st">`</span><span class="dt">_abc</span><span class="st">`</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [1] 1</span></a>
-<<<<<<< HEAD
-<a class="sourceLine" id="cb9-4" title="4"></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="st">`</span><span class="dt">if</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="st">`</span><span class="dt">if</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; [1] 10</span></a></code></pre></div>
-=======
 <a class="sourceLine" id="cb9-4" title="4"><span class="st">`</span><span class="dt">if</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="dv">10</span></a>
 <a class="sourceLine" id="cb9-5" title="5"><span class="st">`</span><span class="dt">if</span><span class="st">`</span></a>
 <a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; [1] 10</span></a></code></pre></div>
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
 <p>보통 의도적으로 이런 요상한 이름들을 만들 일은 거의 없겠지만, R 외부에서 만들어진 데이터를 불러올 때 이런 이름들을 흔히 마주칠 수 있기 때문에, 이를 이해할 필요가 있습니다.</p>
 </div>
 <div id="exercises" class="section level3">
@@ -306,27 +287,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="copy-on-modify" class="section level2">
 <h2><span class="header-section-number">2.3</span> Copy-on-modify</h2>
-<p>아래 코드를 살펴봅시다. 이것은 <code>x</code>와 <code>y</code>를 동일한 수면 밑 값과 묶어줍니다. 그리고 <code>y</code>를 변형합니다.</p>
+<p>아래 코드를 살펴봅시다. 이것은 <code>x</code>와 <code>y</code>를 동일한 참조값과 묶어줍니다. 그리고 <code>y</code>를 변형합니다.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb12-2" title="2">y &lt;-<span class="st"> </span>x</a>
-<<<<<<< HEAD
 <a class="sourceLine" id="cb12-3" title="3"></a>
 <a class="sourceLine" id="cb12-4" title="4">y[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="dv">4</span></a>
 <a class="sourceLine" id="cb12-5" title="5">x</a>
 <a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; [1] 1 2 3</span></a></code></pre></div>
-=======
-<a class="sourceLine" id="cb12-3" title="3">y[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb12-4" title="4">x</a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; [1] 1 2 3</span></a></code></pre></div>
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
 <p><code>y</code>를 변형하는 것은 분명히 <code>x</code>는 변형시키지 않습니다. 그럼 공유된 연결성에는 무슨 일이 일어날까요? <code>y</code>와 연관된 값은 변하지만, 원본 객체는 그렇지 않습니다. 대신에, R은 <code>0x74b</code>의 값을 하나 바꾼 <code>0xcd2</code>라는 새로운 복사본을 만들고, <code>y</code>와 다시 연결시켜 줍니다.</p>
 <p><img src="diagrams/name-value/binding-3.png" style="display: block; margin: auto;" /></p>
 <p>이런 현상을 <strong>copy-on-modify</strong>라고 부릅니다. 이를 이해한다면 R 코드 성능에 대한 직관이 굉장히 향상될 것입니다. 이 행태를 설명하는 다른 표현으로, R 객체는 변경할 수 없다(unchangeable), 또는 <strong>불변하다(immutable)</strong> 등이 있겠습니다. 그러나 전 이런 용어는 대체로 쓰지 않으려고 하는데, 섹션 2.5에서 배우게 될 copy-on-modify의 중요한 예외사항들이 있기 때문입니다.</p>
-<p>copy-on-modify에 대해 탐험하려고 할 때, RStudio 내에서는 다른 결과들을 얻게 될 수 있다는 것에 유의하세요. 이건 환경창(environment pane)이 각 객체들에 대한 정보를 보여주기 위해, 각 객체에 대한 참조를 만들어야만 하기 때문입니다. 이는 당신의 인터엑티브한 탐험을 왜곡시킬 수 있지만, 함수 내부에 있는 코드들엔 영향을 미치지 않습니다. 때문에 데이터 분석을 하는 동안에는 성능에 영향도 없습니다. 실험을 위해서라면, 터미널에서 R을 직접 실행하거나, RMarkdown을 이용하는 것을 추천드립니다.</p>
+<p>copy-on-modify에 대해 알아보려고 할 때, RStudio 내에서는 다른 결과들을 얻게 될 수 있다는 것에 유의하세요. 이건 환경창(environment pane)이 각 객체들에 대한 정보를 보여주기 위해, 각 객체에 대한 참조를 만들어야만 하기 때문입니다. 이는 당신의 인터렉티브한 탐사를 왜곡시킬 수 있지만, 함수 내부에 있는 코드들엔 영향을 미치지 않습니다. 때문에 데이터 분석을 하는 동안에는 성능에 영향도 없습니다. 실험을 위해서라면, 터미널에서 R을 직접 실행하거나, RMarkdown을 이용하는 것을 추천드립니다.</p>
 <div id="tracemem" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> <code>tracemem()</code></h3>
-<<<<<<< HEAD
-<p><code>base::tracemem()</code>의 도움을 받아 객체가 언제 복사되는지 볼 수 있습니다. 한 번 이 함수를 어떤 객체로 실행하면, 이 갳체의 최근 주소를 받아볼 수 있습니다.</p>
+<p><code>base::tracemem()</code>의 도움을 받아 객체가 언제 복사되는지 볼 수 있습니다. 한 번 이 함수를 어떤 객체로 실행하면, 이 객체의 최근 주소를 받아볼 수 있습니다.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="kw">cat</span>(<span class="kw">tracemem</span>(x), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
 <a class="sourceLine" id="cb13-3" title="3"><span class="co">#&gt; &lt;0x7f80c0e0ffc8&gt; </span></a></code></pre></div>
@@ -441,25 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="summary" class="section level2">
 <h2><span class="header-section-number">2.4</span> Summary</h2>
-=======
-</div>
-<div id="function-calls" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> Function calls</h3>
-</div>
-<div id="lists" class="section level3">
-<h3><span class="header-section-number">2.3.3</span> Lists</h3>
-</div>
-<div id="data-frames" class="section level3">
-<h3><span class="header-section-number">2.3.4</span> Data frames</h3>
-</div>
-<div id="character-vectors" class="section level3">
-<h3><span class="header-section-number">2.3.5</span> Character vectors</h3>
-</div>
-<div id="exercises-1" class="section level3">
-<h3><span class="header-section-number">2.3.6</span> Exercises</h3>
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
 
-</div>
 </div>
 </div>
             </section>
