@@ -1,11 +1,7 @@
 --- 
 title: "Advanced R in Korean"
 author: "Jsang"
-<<<<<<< HEAD
-date: "2020-01-08"
-=======
-date: "2020-01-04"
->>>>>>> 73a89cbaf567c6ff4a06ff5cd92186f99b08609f
+date: "2020-01-09"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
