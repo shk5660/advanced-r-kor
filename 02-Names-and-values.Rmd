@@ -616,9 +616,7 @@ x[[1]] <- x
 
 ## Unbinding and the garbage collector
 
-
-
-
+왜케 이거거
 
 
 
