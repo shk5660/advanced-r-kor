@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Advanced R in Korean</title>
+  <title>Chapter 3 Vectors | Advanced R in Korean</title>
   <meta name="description" content="Everything you need (and nothing more) to start a bookdown book." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Advanced R in Korean" />
+  <meta property="og:title" content="Chapter 3 Vectors | Advanced R in Korean" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://seankross.com/bookdown-start/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="shk5660/advanced-r-kor" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Advanced R in Korean" />
+  <meta name="twitter:title" content="Chapter 3 Vectors | Advanced R in Korean" />
   
   <meta name="twitter:description" content="Everything you need (and nothing more) to start a bookdown book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="names-values.html"/>
 
-<link rel="next" href="introduction.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -193,29 +193,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Advanced R in Korean</h1>
-<p class="author"><em>Jsang</em></p>
-<p class="date"><em>2020-01-16</em></p>
+<div id="vectors" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Vectors</h1>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introduction</h2>
+<p>이 Chapter에서는 R의 기본 데이터 타입들 중 가장 중요한, 벡터에 대해 이야기하려 합니다. 아마 당신은 여러 종류의 벡터들을 이미 사용해왔겠지만, 아마 그것들이 서로 어떤 연관성이 있는지에 대해서는 깊게 생각해보지 않았을 겁니다. 이번 Chapter에서 모든 벡터 타입들을 너무 자세히 다루지는 않겠지만, 이 타입들이 전체적으로 어떻게 들어맞는지 보여드리겠습니다. 만약 더 자세히 알고 싶다면, R 문서를 찾아보시면 되겠습니다.</p>
+<p>벡터는 두가지 맛이 있는데, 원자(atomic) 벡터와 리스트입니다. 이들은 가지고 있는 원소 타입에 차이가 있는데, 원자 벡터는 모든 원소가 반드시 같은 타입이어야만 하고, 리스트는 다른 타입의 원소들을 가질 수 있습니다. 벡터는 아니지만, <code>NULL</code>도 벡터와 밀접히 관련되어 있고, 종종 길이가 0인 일반 벡터의 역할을 하기도 합니다. 이 다이어그램이 기본적인 관계들을 표현해주고 있습니다. Chapter가 진행됨에 따라 다이어그램을 확장해보겠습니다.</p>
+<p><img src="diagrams/vectors/summary-tree.png" style="display: block; margin: auto;" /></p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<ul>
-<li>공부삼아 Wickham의 Advanced R을 번역하는 프로젝트를 시작했습니다.</li>
-<li>경어체를 사용한 것은 순전히 본인의 취향입니다.</li>
-<li>스스로 알아먹기 쉬운 느낌으로 의역을 잔뜩했습니다.</li>
-<li>번역이 어려운 부분은 원문 그대로 남겼고, 용어는 한/영을 병기했습니다.</li>
-<li>(@ 블라블라) 형식으로 본인의 생각과 참견을 표현했습니다.</li>
-</ul>
+<div id="atomic-vectors" class="section level2">
+<h2><span class="header-section-number">3.2</span> Atomic vectors</h2>
+</div>
+<div id="attributes" class="section level2">
+<h2><span class="header-section-number">3.3</span> Attributes</h2>
+</div>
+<div id="s3-atomic-vectors" class="section level2">
+<h2><span class="header-section-number">3.4</span> S3 atomic vectors</h2>
+</div>
+<div id="lists-1" class="section level2">
+<h2><span class="header-section-number">3.5</span> Lists</h2>
+</div>
+<div id="data-frames-and-tibbles" class="section level2">
+<h2><span class="header-section-number">3.6</span> Data frames and tibbles</h2>
+</div>
+<div id="null" class="section level2">
+<h2><span class="header-section-number">3.7</span> NULL</h2>
+</div>
+<div id="quiz-answers-1" class="section level2">
+<h2><span class="header-section-number">3.8</span> Quiz answers</h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="names-values.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

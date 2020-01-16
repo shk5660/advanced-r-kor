@@ -670,7 +670,7 @@ mem_used()
 
 ## Quiz answers
 
-1. non-syntactic한 이름을 백틱(`` ` ``)으로 감싸주면 됩니다.
+1. non-syntactic한 이름을 backticks(`` ` ``)로 감싸주면 됩니다.
 
 ```{r}
 df <- data.frame(runif(3), runif(3))

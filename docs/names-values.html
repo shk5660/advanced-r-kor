@@ -24,7 +24,7 @@
 <meta name="author" content="Jsang" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="introduction.html"/>
-
+<link rel="next" href="vectors.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -162,6 +162,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="names-values.html"><a href="names-values.html#unbinding-and-the-garbage-collector"><i class="fa fa-check"></i><b>2.6</b> Unbinding and the garbage collector</a></li>
 <li class="chapter" data-level="2.7" data-path="names-values.html"><a href="names-values.html#quiz-answers"><i class="fa fa-check"></i><b>2.7</b> Quiz answers</a></li>
 <li class="chapter" data-level="2.8" data-path="names-values.html"><a href="names-values.html#summary"><i class="fa fa-check"></i><b>2.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>3</b> Vectors</a><ul>
+<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="vectors.html"><a href="vectors.html#atomic-vectors"><i class="fa fa-check"></i><b>3.2</b> Atomic vectors</a></li>
+<li class="chapter" data-level="3.3" data-path="vectors.html"><a href="vectors.html#attributes"><i class="fa fa-check"></i><b>3.3</b> Attributes</a></li>
+<li class="chapter" data-level="3.4" data-path="vectors.html"><a href="vectors.html#s3-atomic-vectors"><i class="fa fa-check"></i><b>3.4</b> S3 atomic vectors</a></li>
+<li class="chapter" data-level="3.5" data-path="vectors.html"><a href="vectors.html#lists-1"><i class="fa fa-check"></i><b>3.5</b> Lists</a></li>
+<li class="chapter" data-level="3.6" data-path="vectors.html"><a href="vectors.html#data-frames-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Data frames and tibbles</a></li>
+<li class="chapter" data-level="3.7" data-path="vectors.html"><a href="vectors.html#null"><i class="fa fa-check"></i><b>3.7</b> NULL</a></li>
+<li class="chapter" data-level="3.8" data-path="vectors.html"><a href="vectors.html#quiz-answers-1"><i class="fa fa-check"></i><b>3.8</b> Quiz answers</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -625,14 +635,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>이 숫자는 당신의 운영체제에서 보고하는 메모리 양과 일치하진 않을텐데, 이에는 세가지 이유가 있습니다.</p>
 <ol style="list-style-type: decimal">
 <li><p>이는 R 인터프리터가 아닌 R에 의해 생성된 객체들을 포함하고 있습니다.</p></li>
-<li><p>R가 운영체제가 둘 다 게으르기 때문입니다. 얘네들은 실제로 필요하기 전까진 메모리를 반환하지 않습니다. R이 메모리를 붙잡고 있을수도 있는데, OS가 아직 돌려달라고 하지 않았기 때문입니다.</p></li>
+<li><p>R과 운영체제가 둘 다 게으르기 때문입니다. 얘네들은 실제로 필요하기 전까진 메모리를 반환하지 않습니다. R이 메모리를 붙잡고 있을수도 있는데, OS가 아직 돌려달라고 하지 않았기 때문입니다.</p></li>
 <li><p>R은 객체가 차지하는 메모리를 계산합니다. 하지만 지워진 객체들 때문에 차이가 생길 수 있습니다. 이런 문제를 메모리 분열(fragmentation)이라고 합니다.</p></li>
 </ol>
 </div>
 <div id="quiz-answers" class="section level2">
 <h2><span class="header-section-number">2.7</span> Quiz answers</h2>
 <ol style="list-style-type: decimal">
-<li>non-syntactic한 이름을 백틱(<code>`</code>)으로 감싸주면 됩니다.</li>
+<li>non-syntactic한 이름을 backticks(<code>`</code>)로 감싸주면 됩니다.</li>
 </ol>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">runif</span>(<span class="dv">3</span>), <span class="kw">runif</span>(<span class="dv">3</span>))</a>
 <a class="sourceLine" id="cb52-2" title="2"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a>
@@ -665,8 +675,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vectors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
