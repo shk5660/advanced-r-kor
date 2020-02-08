@@ -24,7 +24,7 @@
 <meta name="author" content="Jsang" />
 
 
-<meta name="date" content="2020-01-16" />
+<meta name="date" content="2020-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,14 +164,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="names-values.html"><a href="names-values.html#summary"><i class="fa fa-check"></i><b>2.8</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>3</b> Vectors</a><ul>
-<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="vectors.html"><a href="vectors.html#atomic-vectors"><i class="fa fa-check"></i><b>3.2</b> Atomic vectors</a></li>
-<li class="chapter" data-level="3.3" data-path="vectors.html"><a href="vectors.html#attributes"><i class="fa fa-check"></i><b>3.3</b> Attributes</a></li>
+<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#quiz-1"><i class="fa fa-check"></i>Quiz</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#outline-1"><i class="fa fa-check"></i>Outline</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="vectors.html"><a href="vectors.html#atomic-vectors"><i class="fa fa-check"></i><b>3.2</b> Atomic vectors</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="vectors.html"><a href="vectors.html#scalars"><i class="fa fa-check"></i><b>3.2.1</b> Scalars</a></li>
+<li class="chapter" data-level="3.2.2" data-path="vectors.html"><a href="vectors.html#making-longer-vectors-with-c"><i class="fa fa-check"></i><b>3.2.2</b> Making longer vectors with <code>c()</code></a></li>
+<li class="chapter" data-level="3.2.3" data-path="vectors.html"><a href="vectors.html#missing-values"><i class="fa fa-check"></i><b>3.2.3</b> Missing values</a></li>
+<li class="chapter" data-level="3.2.4" data-path="vectors.html"><a href="vectors.html#testing-and-coercion"><i class="fa fa-check"></i><b>3.2.4</b> Testing and coercion</a></li>
+<li class="chapter" data-level="3.2.5" data-path="vectors.html"><a href="vectors.html#exercises-4"><i class="fa fa-check"></i><b>3.2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="vectors.html"><a href="vectors.html#attributes"><i class="fa fa-check"></i><b>3.3</b> Attributes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="vectors.html"><a href="vectors.html#getting-and-setting"><i class="fa fa-check"></i><b>3.3.1</b> Getting and setting</a></li>
+<li class="chapter" data-level="3.3.2" data-path="vectors.html"><a href="vectors.html#names"><i class="fa fa-check"></i><b>3.3.2</b> Names</a></li>
+<li class="chapter" data-level="3.3.3" data-path="vectors.html"><a href="vectors.html#dimensions"><i class="fa fa-check"></i><b>3.3.3</b> Dimensions</a></li>
+<li class="chapter" data-level="3.3.4" data-path="vectors.html"><a href="vectors.html#exercises-5"><i class="fa fa-check"></i><b>3.3.4</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="vectors.html"><a href="vectors.html#s3-atomic-vectors"><i class="fa fa-check"></i><b>3.4</b> S3 atomic vectors</a></li>
 <li class="chapter" data-level="3.5" data-path="vectors.html"><a href="vectors.html#lists-1"><i class="fa fa-check"></i><b>3.5</b> Lists</a></li>
 <li class="chapter" data-level="3.6" data-path="vectors.html"><a href="vectors.html#data-frames-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Data frames and tibbles</a></li>
 <li class="chapter" data-level="3.7" data-path="vectors.html"><a href="vectors.html#null"><i class="fa fa-check"></i><b>3.7</b> NULL</a></li>
 <li class="chapter" data-level="3.8" data-path="vectors.html"><a href="vectors.html#quiz-answers-1"><i class="fa fa-check"></i><b>3.8</b> Quiz answers</a></li>
+<li class="chapter" data-level="3.9" data-path="vectors.html"><a href="vectors.html#summary-1"><i class="fa fa-check"></i><b>3.9</b> Summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -200,12 +215,287 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>이 Chapter에서는 R의 기본 데이터 타입들 중 가장 중요한, 벡터에 대해 이야기하려 합니다. 아마 당신은 여러 종류의 벡터들을 이미 사용해왔겠지만, 아마 그것들이 서로 어떤 연관성이 있는지에 대해서는 깊게 생각해보지 않았을 겁니다. 이번 Chapter에서 모든 벡터 타입들을 너무 자세히 다루지는 않겠지만, 이 타입들이 전체적으로 어떻게 들어맞는지 보여드리겠습니다. 만약 더 자세히 알고 싶다면, R 문서를 찾아보시면 되겠습니다.</p>
 <p>벡터는 두가지 맛이 있는데, 원자(atomic) 벡터와 리스트입니다. 이들은 가지고 있는 원소 타입에 차이가 있는데, 원자 벡터는 모든 원소가 반드시 같은 타입이어야만 하고, 리스트는 다른 타입의 원소들을 가질 수 있습니다. 벡터는 아니지만, <code>NULL</code>도 벡터와 밀접히 관련되어 있고, 종종 길이가 0인 일반 벡터의 역할을 하기도 합니다. 이 다이어그램이 기본적인 관계들을 표현해주고 있습니다. Chapter가 진행됨에 따라 다이어그램을 확장해보겠습니다.</p>
 <p><img src="diagrams/vectors/summary-tree.png" style="display: block; margin: auto;" /></p>
+<p>모든 벡터는 또한 _특성(attribute)_를 가질 수 있는데, 이름이 붙은 임의의 메타데이터라고 볼 수 있습니다. 특성 중 두 개가 특별히 중요합니다. <em>차원(dimension)</em> 특성은 벡터를 행렬(matrices)이나 배열(array)로 바꿔주고, <em>클래스(class)</em> 특성은 S3 객체 시스템을 강화합니다. S3를 어떻게 사용하는 지는 Chapter 13에서 배우겠지만, 여기에서도 가장 중요한 S3 벡터인 팩터(factors), 날짜 시간(date and times), 데이터 프레임(data frames), 그리고 티블(tibbles)에 대해 배울 것입니다. 행렬이나 데이터 프레임 같은 2D 구조들은 딱히 벡터 같다고 생각되지 않을 수 있는데, 왜 R이 이들을 벡터로 간주하는지도 배우게 됩니다.</p>
+<div id="quiz-1" class="section level3 unnumbered">
+<h3>Quiz</h3>
+<p>이 짧은 퀴즈를 풀어보고 이 Chapter를 읽을 필요가 있는지 확인해 봅시다. 만약 답이 금방 떠오른다면, 이 Chapter를 편안히 넘겨도 됩니다. Section 3.8에서 답을 확인해보세요.</p>
+<ol style="list-style-type: decimal">
+<li><p>네 가지 일반적인 유형의 atomic 벡터는 무엇입니까? 두 가지 희귀한 유형은 무엇인가요?</p></li>
+<li><p>특성(attributes)가 무엇입니까? 어떻게 구할 수 있고 설정할 수 있습니까?</p></li>
+<li><p>리스트는 atomic 벡터와 어떻게 다른가요? 또 행렬은 데이터 프레임과 어떻게 다릅니까?</p></li>
+<li><p>행렬인 리스트를 가질 수 있습니까? 데이터 프레임이 행렬을 열로 가질 수 있습니까?</p></li>
+<li><p>티블(tibbles)는 데이터 프레임과 어떻게 다르게 동작합니까?</p></li>
+</ol>
+</div>
+<div id="outline-1" class="section level3 unnumbered">
+<h3>Outline</h3>
+<ul>
+<li><p>Section 3.2에서는 논리형(logical), 정수형(integer), 실수형(double), 문자형(character)이라는 atomic 벡터들을 소개하겠습니다. 이는 R의 가장 간단한 데이터 구조들입니다.</p></li>
+<li><p>Section 3.3에서는 R의 유연한 메타데이터 설명서인 특성(attributes)를 논합니다. 가장 중요한 특성들은 이름(names), 차원(dimensions), 그리고 클래스(class)입니다.</p></li>
+<li><p>Section 3.4는 atomic 벡터와 특별한 특성이 결합되어 만들어진 중요한 벡터 타입들에 대해 다룹니다. 이는 팩터(factors), 날짜(dates), 날짜-시간(date-times), 그리고 지속시간(durations)를 포함합니다.</p></li>
+<li><p>Section 3.5에선 리스트를 깊게 살펴봅니다. 리스트는 atomic 벡터와 매우 비슷하지만, 한가지 중요한 차이가 있습니다. 바로 리스트는 다른 리스트를 포함해 모든 데이터 타입을 원소로 가질 수 있다는 것입니다. 이 특징은 계층적인 데이터를 표현하기 적합하게 만들어줍니다.</p></li>
+<li><p>Section 3.6은 데이터 프레임과 티블에 대해 가르쳐줍니다. 이들은 직사각형 모양 데이터를 나타낼 때 사용됩니다. 또한 리스트와 행렬의 특징이 결합되어 있어, 통계적 데이터를 다루는 데에도 매우 적합한 구조입니다.</p></li>
+</ul>
+</div>
 </div>
 <div id="atomic-vectors" class="section level2">
 <h2><span class="header-section-number">3.2</span> Atomic vectors</h2>
+<p>논리형(logical), 정수형(integer), 실수형(double), 문자형(character)은 atomic 벡터의 네 가지 기본 유형입니다. 정수형과 실수형 벡터들은 합쳐서 숫자형(numeric) 벡터로도 알려져 있습니다. 복소수형(complex)과 Raw 타입은 두 가지 희귀 유형입니다. 이들을 더 깊게 다루지는 않으려고 하는데, 복소수형은 통계학에서는 거의 쓸 일이 없고, raw 벡터는 binary 데이터를 다룰 때만 필요한 특수한 유형이기 때문입니다.</p>
+<p><img src="diagrams/vectors/summary-tree-atomic.png" style="display: block; margin: auto;" /></p>
+<div id="scalars" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Scalars</h3>
+<p>각 네 가지 기본 타입들은 개별 값을 생성하기 위해, 일명 _scalar_라고 하는 특별한 문법을 갖고 있습니다.</p>
+<ul>
+<li><p>논리형은 풀 네임(<code>TRUE</code> 또는 <code>FALSE</code>), 또는 축약 버전(<code>T</code> 또는 <code>F</code>)으로 쓸 수 있습니다.</p></li>
+<li><p>실수형은 10진법(<code>0.1234</code>), 지수표기법(<code>1.23e4</code>), 또는 16진법(<code>0xcafe</code>) 형태로 표기될 수 있습니다. 실수형에만 있는 세 가지 특별한 값이 있습니다. <code>Inf</code>, <code>-Inf</code>, 그리고 <code>NaN</code>(not a number)인데, 이들은 부동 소수점 표준에 의해 정의된 특수한 값입니다.</p></li>
+<li><p>정수형은 실수형과 비슷하게 쓰여지지만 반드시 <code>L</code>를 뒤에 붙여주어야 합니다.(<code>1234L</code>, <code>1e4L</code>, 또는 <code>0xcafeL</code>) 그리고 분수를 포함할 수 없습니다.</p></li>
+<li><p>문자형은 <code>"</code>(<code>"hi"</code>) 또는 <code>'</code>(<code>'bye'</code>)로 감싸집니다. 특수한 문자들은 <code>\</code>를 이용해 이스케이프 할 수 있는데, 자세한 내용은 <code>?Quotes</code>에서 확인하세요.</p></li>
+</ul>
+</div>
+<div id="making-longer-vectors-with-c" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Making longer vectors with <code>c()</code></h3>
+<p>짧은 벡터들을 가지고 더 긴 벡터들을 만들고 싶다면, <code>c()</code>를 사용하세요.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">lgl_var &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb54-2" title="2">int_var &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 6L, 10L)</a>
+<a class="sourceLine" id="cb54-3" title="3">dbl_var &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">2.5</span>, <span class="fl">4.5</span>)</a>
+<a class="sourceLine" id="cb54-4" title="4">chr_var &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;these are&quot;</span>, <span class="st">&quot;some strings&quot;</span>)</a></code></pre></div>
+<p>인풋값이 atomic 벡터라면, <code>c()</code>는 항상 다른 atomic 벡터를 만들어냅니다.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="co">#&gt; [1] 1 2 3 4</span></a></code></pre></div>
+<p>다이어그램에서 벡터들은 연결된 직사각형으로 표현했습니다. 위의 코드는 아래와 같이 표현할 수 있습니다.</p>
+<p><img src="diagrams/vectors/atomic.png" style="display: block; margin: auto;" /></p>
+<p><code>typeof()</code>를 이용해서 벡터의 타입을, <code>length()</code>로 길이를 확인할 수 있습니다.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">typeof</span>(lgl_var)</a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="co">#&gt; [1] &quot;logical&quot;</span></a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="kw">typeof</span>(int_var)</a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="co">#&gt; [1] &quot;integer&quot;</span></a>
+<a class="sourceLine" id="cb56-5" title="5"><span class="kw">typeof</span>(dbl_var)</a>
+<a class="sourceLine" id="cb56-6" title="6"><span class="co">#&gt; [1] &quot;double&quot;</span></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="kw">typeof</span>(chr_var)</a>
+<a class="sourceLine" id="cb56-8" title="8"><span class="co">#&gt; [1] &quot;character&quot;</span></a></code></pre></div>
+</div>
+<div id="missing-values" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Missing values</h3>
+<p>R은, 특수한 값인 <code>NA</code>(not applicable의 약자)를 이용해서 결측값이나 미지의 값을 나타냅니다. 결측값은 전염되는 성질이 있습니다. 결측값을 포함하는 대부분의 연산은 또 다른 결측값을 내놓습니다.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="ot">NA</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="co">#&gt; [1] NA</span></a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="co">#&gt; [1] NA</span></a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="op">!</span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb57-6" title="6"><span class="co">#&gt; [1] NA</span></a></code></pre></div>
+<p>이 규칙에는 몇 가지 예외가 있는데, 모든 가능한 입력값에 대해 동일한 결과를 도출하는 경우에만 발생합니다.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="ot">NA</span> <span class="op">^</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="ot">NA</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb58-5" title="5"><span class="ot">NA</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb58-6" title="6"><span class="co">#&gt; [1] FALSE</span></a></code></pre></div>
+<p>결측치가 옮겨가는 현상 때문에 벡터 안의 결측값을 찾아내려 할 때 흔히 실수가 발생합니다.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb59-2" title="2">x <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="co">#&gt; [1] NA NA NA NA</span></a></code></pre></div>
+<p>한 결측값이 다른 것과 같은 값을 가지리란 보장이 없기 때문에, 이러한 결과는 합당하다고 볼 수 있습니다. 대신에 <code>is.na()</code>를 사용하면 결측의 존재를 확인할 수 있습니다.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">is.na</span>(x)</a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="co">#&gt; [1]  TRUE FALSE  TRUE FALSE</span></a></code></pre></div>
+</div>
+<div id="testing-and-coercion" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Testing and coercion</h3>
+<p>일반적으로 <code>is.*()</code> 함수로 벡터가 주어진 타입의 것인지 _테스트_할 수 있습니다. 하지만 이 함수들은 주의해서 사용해야합니다. <code>is.logical()</code>, <code>is.integer()</code>, <code>is.double()</code>, 그리고 <code>is.character()</code>은 우리가 예상하는대로, 벡터가 문자형인지 실수형인지 정수형인지 논리형인지 확인해줍니다. <code>is.vector()</code>, <code>is.atomic()</code>, <code>is.numeric()</code>은 사용하지 마세요. 이들은 벡터인지 atomic 벡터인지 숫자형인지 확인하지 않습니다. 문서를 주의깊게 읽어 이들이 실제로 무엇을 하는지 알아보세요.</p>
+<p>atomic vectors에게, 타입은 벡터 전체의 성질입니다. 모든 원소가 같은 타입을 가져야하니까요. 만약 다른 타입들을 결합하려한다면, 지정된 순서에 따라 _강제(coerced)_됩니다.</p>
+<p>순서 : 문자형 → 실수형 → 정수형 → 논리형</p>
+<p>예를 들어, 문자형과 정수형의 결합은 문자형이 됩니다.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">str</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="co">#&gt;  chr [1:2] &quot;a&quot; &quot;1&quot;</span></a></code></pre></div>
+<p>Coercion은 대개 자동으로 일어납니다. 대부분의 수학 관련 함수들(<code>+</code>, <code>log</code>, <code>abs</code> 등)은 숫자로 강제합니다. 이런 종류의 coercion은 논리형 벡터들에 대해 특히 유용한데, <code>TRUE</code>는 1이 되고 <code>FALSE</code>는 0이 되기 때문입니다.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="kw">as.numeric</span>(x)</a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="co">#&gt; [1] 0 0 1</span></a>
+<a class="sourceLine" id="cb62-4" title="4"></a>
+<a class="sourceLine" id="cb62-5" title="5"><span class="co"># Total number of TRUEs</span></a>
+<a class="sourceLine" id="cb62-6" title="6"><span class="kw">sum</span>(x)</a>
+<a class="sourceLine" id="cb62-7" title="7"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb62-8" title="8"></a>
+<a class="sourceLine" id="cb62-9" title="9"><span class="co"># Proportion that are TRUE</span></a>
+<a class="sourceLine" id="cb62-10" title="10"><span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb62-11" title="11"><span class="co">#&gt; [1] 0.333</span></a></code></pre></div>
+<p><code>as.logical()</code>, <code>as.integer()</code>, <code>as.double()</code>, <code>as.character()</code>과 같은 <code>as.*()</code> 함수를 사용해서 고의적으로 강제할 수 있습니다. 문자를 강제하는데 실패하는 경우 경고와 결측값이 생깁니다.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">as.integer</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;1.5&quot;</span>, <span class="st">&quot;a&quot;</span>))</a>
+<a class="sourceLine" id="cb63-2" title="2"><span class="co">#&gt; Warning: 강제형변환에 의해 생성된 NA 입니다</span></a>
+<a class="sourceLine" id="cb63-3" title="3"><span class="co">#&gt; [1]  1  1 NA</span></a></code></pre></div>
+</div>
+<div id="exercises-4" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>raw와 complex scalar를 어떻게 만들 수 있을까요?</p></li>
+<li><p>아래의 결과물을 예상하며 벡터 coercion에 대한 지식을 확인해보세요.</p></li>
+</ol>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb64-2" title="2"><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb64-3" title="3"><span class="kw">c</span>(<span class="ot">TRUE</span>, 1L)</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><p>왜 <code>1 =="1"</code>이 참일까요? 왜 <code>-1 &lt; FALSE</code>는 참일까요? 왜 <code>"one" &lt; 2</code>는 거짓일까요?</p></li>
+<li><p>왜 디폴트 <code>NA</code>는 논리형 벡터일까요? 논리형 벡터의 특별한 점은 무엇인가요?(힌트: <code>c(FALSE, NA_character_)</code>를 생각해보세요)</p></li>
+<li><p>정확히 <code>is.atomic()</code>, <code>is.numeric()</code>, <code>is.vector()</code>는 무엇을 테스트하나요?</p></li>
+</ol>
+</div>
 </div>
 <div id="attributes" class="section level2">
 <h2><span class="header-section-number">3.3</span> Attributes</h2>
+<p>아마 atomic 벡터 시리즈가 행렬, 배열, 팩터, 날짜-시간 데이터와 같이 많은 중요한 데이터 구조들을 포함하지 않는다는 사실을 눈치채셨을 것 같습니다. 이 타입들은 atomic 벡터에 속성(attributes)를 추가하여 구축됩니다. 이 Section에서는 속성의 기초와, 어떻게 차원(dim) 속성이 행렬과 배열을 만들어 내는지 배웁니다. 다음 Section에서 어떻게 클래스 속성이 팩터, 날짜, 날짜-시간과 같은 S3 벡터들을 만드는지 배우겠습니다.</p>
+<div id="getting-and-setting" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Getting and setting</h3>
+<p>속성이란 객체에 메타데이터를 더해주는 이름과 값의 쌍이라고 볼 수 있습니다. 개개의 속성들은 <code>attr()</code>를 사용하여 검색하거나 수정할 수 있고, <code>attributes()</code>를 사용하여 전체를 검색하고 <code>structure()</code>를 사용해서 일괄 설정할 수 있습니다.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">a &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="kw">attr</span>(a, <span class="st">&quot;x&quot;</span>) &lt;-<span class="st"> &quot;abcdef&quot;</span></a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="kw">attr</span>(a, <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="co">#&gt; [1] &quot;abcdef&quot;</span></a>
+<a class="sourceLine" id="cb65-5" title="5"></a>
+<a class="sourceLine" id="cb65-6" title="6"><span class="kw">attr</span>(a, <span class="st">&quot;y&quot;</span>) &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="kw">str</span>(<span class="kw">attributes</span>(a))</a>
+<a class="sourceLine" id="cb65-8" title="8"><span class="co">#&gt; List of 2</span></a>
+<a class="sourceLine" id="cb65-9" title="9"><span class="co">#&gt;  $ x: chr &quot;abcdef&quot;</span></a>
+<a class="sourceLine" id="cb65-10" title="10"><span class="co">#&gt;  $ y: int [1:3] 4 5 6</span></a>
+<a class="sourceLine" id="cb65-11" title="11"></a>
+<a class="sourceLine" id="cb65-12" title="12"><span class="co"># Or equivalently</span></a>
+<a class="sourceLine" id="cb65-13" title="13">a &lt;-<span class="st"> </span><span class="kw">structure</span>(</a>
+<a class="sourceLine" id="cb65-14" title="14">  <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb65-15" title="15">  <span class="dt">x =</span> <span class="st">&quot;abcdef&quot;</span>,</a>
+<a class="sourceLine" id="cb65-16" title="16">  <span class="dt">y =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb65-17" title="17">)</a>
+<a class="sourceLine" id="cb65-18" title="18"><span class="kw">str</span>(<span class="kw">attributes</span>(a))</a>
+<a class="sourceLine" id="cb65-19" title="19"><span class="co">#&gt; List of 2</span></a>
+<a class="sourceLine" id="cb65-20" title="20"><span class="co">#&gt;  $ x: chr &quot;abcdef&quot;</span></a>
+<a class="sourceLine" id="cb65-21" title="21"><span class="co">#&gt;  $ y: int [1:3] 4 5 6</span></a></code></pre></div>
+<p><img src="diagrams/vectors/attr.png" style="display: block; margin: auto;" /></p>
+<p>속성은 일반적으로는 일시적이라고 생각해야 합니다. 예를 들어, 대부분의 속성들은 대부분의 연산에 의해 사라집니다.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">attributes</span>(a[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="co">#&gt; NULL</span></a>
+<a class="sourceLine" id="cb66-3" title="3"><span class="kw">attributes</span>(<span class="kw">sum</span>(a))</a>
+<a class="sourceLine" id="cb66-4" title="4"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<p>일상적으로 보존되는 속성은 두가지 뿐입니다.</p>
+<ul>
+<li><strong>이름(names)</strong>: 각 요소에 이름을 부여하는 문자형 벡터입니다.</li>
+<li><strong>차원(dim)</strong>: dimensions의 약자로, 벡터를 행렬이나 배열로 만들어주는 정수형 벡터입니다.</li>
+</ul>
+<p>다른 속성들을 보존하기 위해선, Chapter 13의 주제인, S3 클래스를 만들어 사용해야 합니다.</p>
+</div>
+<div id="names" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Names</h3>
+<p>세 가지 방식으로 벡터에 이름을 부여할 수 있습니다.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># When creating it: </span></a>
+<a class="sourceLine" id="cb67-2" title="2">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>, <span class="dt">c =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb67-3" title="3"></a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="co"># By assigning a character vector to names()</span></a>
+<a class="sourceLine" id="cb67-5" title="5">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb67-6" title="6"><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb67-7" title="7"></a>
+<a class="sourceLine" id="cb67-8" title="8"><span class="co"># Inline, with setNames():</span></a>
+<a class="sourceLine" id="cb67-9" title="9">x &lt;-<span class="st"> </span><span class="kw">setNames</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
+<p><code>attr(x, "names")</code>는 <code>names(x)</code>에 비해 타이핑도 많이 해야하고 가독성이 떨어지므로 사용을 피해주세요. <code>unname(x)</code> 또는 <code>names(x) &lt;- NULL</code>을 사용해 벡터의 이름을 제거할 수도 있습니다.</p>
+<p>기술적으로 정확히 하기 위해, 이름이 있는 벡터 <code>x</code>를 그릴 때는 다음과 같이 그려야 합니다.</p>
+<p><img src="diagrams/vectors/attr-names-1.png" style="display: block; margin: auto;" /></p>
+<p>하지만 이름은 너무 특별하고 중요하기 때문에, 데이터의 속성 구조에 각별히 주의를 기울이지 않는 한은, 벡터에 직접 라벨을 주도록 하겠습니다.</p>
+<p><img src="diagrams/vectors/attr-names-2.png" style="display: block; margin: auto;" /></p>
+<p>문자를 이용한 서브 세팅의 편리를 위해, 이름은 고유해야하고 결측이 아니어야만 합니다. 하지만 이건 R이 강제하는 바는 아닙니다. 이름이 어떻게 설정되냐에 따라, 누락된 이름은 <code>""</code> 또는 <code>NA_character_</code>이 될 수도 있습니다. 만약 모든 이름이 누락되어 있다면, <code>names()</code>는 <code>NULL</code>을 반환합니다.</p>
+</div>
+<div id="dimensions" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Dimensions</h3>
+<p><code>dim</code> 속성을 벡터에 추가하는 것은 벡터가 2차원 _행렬_이나 다차원 _배열_처럼 작동할 수 있게 해줍니다. 행렬과 배열은 주로 수학이나 통계학적 도구이지, 프로그래밍 도구는 아닙니다. 따라서 이들은 자주 사용되지는 않으므로 이 책에서는 간략히 다루겠습니다. 이것들의 가장 중요한 특징은 Section 4.2.3에서 다룰 다차원 세브세팅입니다.</p>
+<p>행렬과 배열을 만들기 위해서는 <code>matrix()</code>와 <code>array()</code>를 사용하거나, <code>dim()</code> 형태의 할당을 사용할 수 있습니다.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="co"># Two scalar arguments specify row and column sizes</span></a>
+<a class="sourceLine" id="cb68-2" title="2">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb68-3" title="3">a</a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="co">#&gt;      [,1] [,2] [,3]</span></a>
+<a class="sourceLine" id="cb68-5" title="5"><span class="co">#&gt; [1,]    1    3    5</span></a>
+<a class="sourceLine" id="cb68-6" title="6"><span class="co">#&gt; [2,]    2    4    6</span></a>
+<a class="sourceLine" id="cb68-7" title="7"></a>
+<a class="sourceLine" id="cb68-8" title="8"><span class="co"># One vector argument to describe all dimensions</span></a>
+<a class="sourceLine" id="cb68-9" title="9">b &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb68-10" title="10">b</a>
+<a class="sourceLine" id="cb68-11" title="11"><span class="co">#&gt; , , 1</span></a>
+<a class="sourceLine" id="cb68-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb68-13" title="13"><span class="co">#&gt;      [,1] [,2] [,3]</span></a>
+<a class="sourceLine" id="cb68-14" title="14"><span class="co">#&gt; [1,]    1    3    5</span></a>
+<a class="sourceLine" id="cb68-15" title="15"><span class="co">#&gt; [2,]    2    4    6</span></a>
+<a class="sourceLine" id="cb68-16" title="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb68-17" title="17"><span class="co">#&gt; , , 2</span></a>
+<a class="sourceLine" id="cb68-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb68-19" title="19"><span class="co">#&gt;      [,1] [,2] [,3]</span></a>
+<a class="sourceLine" id="cb68-20" title="20"><span class="co">#&gt; [1,]    7    9   11</span></a>
+<a class="sourceLine" id="cb68-21" title="21"><span class="co">#&gt; [2,]    8   10   12</span></a>
+<a class="sourceLine" id="cb68-22" title="22"></a>
+<a class="sourceLine" id="cb68-23" title="23"><span class="co"># You can also modify an object in place by setting dim()</span></a>
+<a class="sourceLine" id="cb68-24" title="24">c &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb68-25" title="25"><span class="kw">dim</span>(c) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb68-26" title="26">c</a>
+<a class="sourceLine" id="cb68-27" title="27"><span class="co">#&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb68-28" title="28"><span class="co">#&gt; [1,]    1    4</span></a>
+<a class="sourceLine" id="cb68-29" title="29"><span class="co">#&gt; [2,]    2    5</span></a>
+<a class="sourceLine" id="cb68-30" title="30"><span class="co">#&gt; [3,]    3    6</span></a></code></pre></div>
+<p>벡터에 작동하는 많은 함수들은 행렬과 배열에도 일반화가 가능합니다.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Vector</th>
+<th>Matrix</th>
+<th>Array</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>names()</code></td>
+<td><code>rownames()</code>, <code>colnames()</code></td>
+<td><code>dimnames()</code></td>
+</tr>
+<tr class="even">
+<td><code>length()</code></td>
+<td><code>nrow()</code>, <code>ncol()</code></td>
+<td><code>dim()</code></td>
+</tr>
+<tr class="odd">
+<td><code>c()</code></td>
+<td><code>rbind()</code>, <code>cbind()</code></td>
+<td><code>abind::abind()</code></td>
+</tr>
+<tr class="even">
+<td>—</td>
+<td><code>t()</code></td>
+<td><code>aperm()</code></td>
+</tr>
+<tr class="odd">
+<td><code>is.null(dim(x))</code></td>
+<td><code>is.matrix()</code></td>
+<td><code>is.array()</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>dim</code> 속성이 없는 벡터는 1차원으로 생각되지만, 실제로는 <code>NULL</code> 차원입니다. 하나의 행이나 열을 가지는 행렬이나, 1차원인 배열도 만들 수 있습니다. 이들은 비슷하게 출력되지만, 다르게 동작합니다. 이 차이점들은 그리 중요하진 않지만, 알아두면 함수가 이상한 결과물을 뱉는 경우에 유용할 수 있습니다.(<code>tapply()</code>가 빈번히 이럽디다) 뭐 여느때와 마찬가지로, <code>str()</code>을 이용해서 차이점을 확인할 수 있습니다.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">str</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)                   <span class="co"># 1d vector</span></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="co">#&gt;  int [1:3] 1 2 3</span></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="kw">str</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)) <span class="co"># column vector</span></a>
+<a class="sourceLine" id="cb69-4" title="4"><span class="co">#&gt;  int [1:3, 1] 1 2 3</span></a>
+<a class="sourceLine" id="cb69-5" title="5"><span class="kw">str</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">1</span>)) <span class="co"># row vector</span></a>
+<a class="sourceLine" id="cb69-6" title="6"><span class="co">#&gt;  int [1, 1:3] 1 2 3</span></a>
+<a class="sourceLine" id="cb69-7" title="7"><span class="kw">str</span>(<span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>))         <span class="co"># &quot;array&quot; vector</span></a>
+<a class="sourceLine" id="cb69-8" title="8"><span class="co">#&gt;  int [1:3(1d)] 1 2 3</span></a></code></pre></div>
+</div>
+<div id="exercises-5" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p><code>setNames()</code>와 <code>unname()</code>은 어떻게 구현되어 있습니까? 소스 코드를 읽어보세요.</p></li>
+<li><p><code>dim()</code>이 1차원 벡터에게 적용되었을 때 무엇이 반환됩니까? <code>NROW()</code>나 <code>NCOL()</code>은 언제 사용하나요?</p></li>
+<li><p>다음 세 객체를 어떻게 설명하시겠습니까? <code>1:5</code>와 다른 점이 무엇인가요?</p></li>
+</ol>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">x1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb70-2" title="2">x2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb70-3" title="3">x3 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>초기 원고에서는 <code>structure()</code>를 표현하기 위해 이 코드를 사용했었습니다.</li>
+</ol>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">structure</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">comment =</span> <span class="st">&quot;my attribute&quot;</span>)</a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="co">#&gt; [1] 1 2 3 4 5</span></a></code></pre></div>
+<p>하지만 이 객체를 프린트하면 comment 속성을 볼 수 없습니다. 왜일까요? 속성이 누락된 것일까요? 아니면 뭔가 특별한 것이 있는 걸까요?(힌트: help를 사용해보세요)</p>
+</div>
 </div>
 <div id="s3-atomic-vectors" class="section level2">
 <h2><span class="header-section-number">3.4</span> S3 atomic vectors</h2>
@@ -221,6 +511,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="quiz-answers-1" class="section level2">
 <h2><span class="header-section-number">3.8</span> Quiz answers</h2>
+</div>
+<div id="summary-1" class="section level2">
+<h2><span class="header-section-number">3.9</span> Summary</h2>
 
 </div>
 </div>

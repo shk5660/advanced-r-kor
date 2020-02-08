@@ -14,10 +14,361 @@ source("common.R")
 knitr::include_graphics("diagrams/vectors/summary-tree.png")
 ```
 
+모든 벡터는 또한 _특성(attribute)_를 가질 수 있는데, 이름이 붙은 임의의 메타데이터라고 볼 수 있습니다. 특성 중 두 개가 특별히 중요합니다. _차원(dimension)_ 특성은 벡터를 행렬(matrices)이나 배열(array)로 바꿔주고, _클래스(class)_ 특성은 S3 객체 시스템을 강화합니다. S3를 어떻게 사용하는 지는 Chapter 13에서 배우겠지만, 여기에서도 가장 중요한 S3 벡터인 팩터(factors), 날짜 시간(date and times), 데이터 프레임(data frames), 그리고 티블(tibbles)에 대해 배울 것입니다. 행렬이나 데이터 프레임 같은 2D 구조들은 딱히 벡터 같다고 생각되지 않을 수 있는데, 왜 R이 이들을 벡터로 간주하는지도 배우게 됩니다.
+
+
+### Quiz {-}
+
+이 짧은 퀴즈를 풀어보고 이 Chapter를 읽을 필요가 있는지 확인해 봅시다. 만약 답이 금방 떠오른다면, 이 Chapter를 편안히 넘겨도 됩니다. Section 3.8에서 답을 확인해보세요.
+
+1. 네 가지 일반적인 유형의 atomic 벡터는 무엇입니까? 두 가지 희귀한 유형은 무엇인가요?
+
+2. 특성(attributes)가 무엇입니까? 어떻게 구할 수 있고 설정할 수 있습니까?
+
+3. 리스트는 atomic 벡터와 어떻게 다른가요? 또 행렬은 데이터 프레임과 어떻게 다릅니까?
+
+4. 행렬인 리스트를 가질 수 있습니까? 데이터 프레임이 행렬을 열로 가질 수 있습니까?
+
+5. 티블(tibbles)는 데이터 프레임과 어떻게 다르게 동작합니까?
+
+
+### Outline {-}
+
+* Section 3.2에서는 논리형(logical), 정수형(integer), 실수형(double), 문자형(character)이라는 atomic 벡터들을 소개하겠습니다. 이는 R의 가장 간단한 데이터 구조들입니다.
+
+* Section 3.3에서는 R의 유연한 메타데이터 설명서인 특성(attributes)를 논합니다. 가장 중요한 특성들은 이름(names), 차원(dimensions), 그리고 클래스(class)입니다.
+
+* Section 3.4는 atomic 벡터와 특별한 특성이 결합되어 만들어진 중요한 벡터 타입들에 대해 다룹니다. 이는 팩터(factors), 날짜(dates), 날짜-시간(date-times), 그리고 지속시간(durations)를 포함합니다.
+
+* Section 3.5에선 리스트를 깊게 살펴봅니다. 리스트는 atomic 벡터와 매우 비슷하지만, 한가지 중요한 차이가 있습니다. 바로 리스트는 다른 리스트를 포함해 모든 데이터 타입을 원소로 가질 수 있다는 것입니다. 이 특징은 계층적인 데이터를 표현하기 적합하게 만들어줍니다.
+
+* Section 3.6은 데이터 프레임과 티블에 대해 가르쳐줍니다. 이들은 직사각형 모양 데이터를 나타낼 때 사용됩니다. 또한 리스트와 행렬의 특징이 결합되어 있어, 통계적 데이터를 다루는 데에도 매우 적합한 구조입니다.
+
+
 ## Atomic vectors
+
+논리형(logical), 정수형(integer), 실수형(double), 문자형(character)은 atomic 벡터의 네 가지 기본 유형입니다. 정수형과 실수형 벡터들은 합쳐서 숫자형(numeric) 벡터로도 알려져 있습니다. 복소수형(complex)과 Raw 타입은 두 가지 희귀 유형입니다. 이들을 더 깊게 다루지는 않으려고 하는데, 복소수형은 통계학에서는 거의 쓸 일이 없고, raw 벡터는 binary 데이터를 다룰 때만 필요한 특수한 유형이기 때문입니다.
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/summary-tree-atomic.png")
+```
+
+
+### Scalars
+
+각 네 가지 기본 타입들은 개별 값을 생성하기 위해, 일명 _scalar_라고 하는 특별한 문법을 갖고 있습니다.
+
+* 논리형은 풀 네임(`TRUE` 또는 `FALSE`), 또는 축약 버전(`T` 또는 `F`)으로 쓸 수 있습니다.
+
+* 실수형은 10진법(`0.1234`), 지수표기법(`1.23e4`), 또는 16진법(`0xcafe`) 형태로 표기될 수 있습니다. 실수형에만 있는 세 가지 특별한 값이 있습니다. `Inf`, `-Inf`, 그리고 `NaN`(not a number)인데, 이들은 부동 소수점 표준에 의해 정의된 특수한 값입니다.
+
+* 정수형은 실수형과 비슷하게 쓰여지지만 반드시 `L`를 뒤에 붙여주어야 합니다.(`1234L`, `1e4L`, 또는 `0xcafeL`) 그리고 분수를 포함할 수 없습니다.
+
+* 문자형은 `"`(`"hi"`) 또는 `'`(`'bye'`)로 감싸집니다. 특수한 문자들은 `\`를 이용해 이스케이프 할 수 있는데, 자세한 내용은 `?Quotes`에서 확인하세요.
+
+
+### Making longer vectors with `c()`
+
+짧은 벡터들을 가지고 더 긴 벡터들을 만들고 싶다면, `c()`를 사용하세요.
+
+```{r}
+lgl_var <- c(TRUE, FALSE)
+int_var <- c(1L, 6L, 10L)
+dbl_var <- c(1, 2.5, 4.5)
+chr_var <- c("these are", "some strings")
+```
+
+인풋값이 atomic 벡터라면, `c()`는 항상 다른 atomic 벡터를 만들어냅니다.
+
+```{r}
+c(c(1, 2), c(3, 4))
+```
+
+다이어그램에서 벡터들은 연결된 직사각형으로 표현했습니다. 위의 코드는 아래와 같이 표현할 수 있습니다.
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/atomic.png")
+```
+
+`typeof()`를 이용해서 벡터의 타입을, `length()`로 길이를 확인할 수 있습니다.
+
+```{r}
+typeof(lgl_var)
+typeof(int_var)
+typeof(dbl_var)
+typeof(chr_var)
+```
+
+
+### Missing values
+
+R은, 특수한 값인 `NA`(not applicable의 약자)를 이용해서 결측값이나 미지의 값을 나타냅니다. 결측값은 전염되는 성질이 있습니다. 결측값을 포함하는 대부분의 연산은 또 다른 결측값을 내놓습니다.
+
+```{r}
+NA > 5
+10 * NA
+!NA
+```
+
+이 규칙에는 몇 가지 예외가 있는데, 모든 가능한 입력값에 대해 동일한 결과를 도출하는 경우에만 발생합니다.
+
+```{r}
+NA ^ 0
+NA | TRUE
+NA & FALSE
+```
+
+결측치가 옮겨가는 현상 때문에 벡터 안의 결측값을 찾아내려 할 때 흔히 실수가 발생합니다.
+
+```{r}
+x <- c(NA, 5, NA, 10)
+x == NA
+```
+
+한 결측값이 다른 것과 같은 값을 가지리란 보장이 없기 때문에, 이러한 결과는 합당하다고 볼 수 있습니다. 대신에 `is.na()`를 사용하면 결측의 존재를 확인할 수 있습니다.
+
+```{r}
+is.na(x)
+```
+
+
+### Testing and coercion
+
+일반적으로 `is.*()` 함수로 벡터가 주어진 타입의 것인지 _테스트_할 수 있습니다. 하지만 이 함수들은 주의해서 사용해야합니다. `is.logical()`, `is.integer()`, `is.double()`, 그리고 `is.character()`은 우리가 예상하는대로, 벡터가 문자형인지 실수형인지 정수형인지 논리형인지 확인해줍니다. `is.vector()`, `is.atomic()`, `is.numeric()`은 사용하지 마세요. 이들은 벡터인지 atomic 벡터인지 숫자형인지 확인하지 않습니다. 문서를 주의깊게 읽어 이들이 실제로 무엇을 하는지 알아보세요.
+
+atomic vectors에게, 타입은 벡터 전체의 성질입니다. 모든 원소가 같은 타입을 가져야하니까요. 만약 다른 타입들을 결합하려한다면, 지정된 순서에 따라 _강제(coerced)_됩니다. 
+
+순서 : 문자형 → 실수형 → 정수형 → 논리형
+
+예를 들어, 문자형과 정수형의 결합은 문자형이 됩니다.
+
+```{r}
+str(c("a", 1))
+```
+
+Coercion은 대개 자동으로 일어납니다. 대부분의 수학 관련 함수들(`+`, `log`, `abs` 등)은 숫자로 강제합니다. 이런 종류의 coercion은 논리형 벡터들에 대해 특히 유용한데, `TRUE`는 1이 되고 `FALSE`는 0이 되기 때문입니다.
+
+```{r}
+x <- c(FALSE, FALSE, TRUE)
+as.numeric(x)
+
+# Total number of TRUEs
+sum(x)
+
+# Proportion that are TRUE
+mean(x)
+```
+
+`as.logical()`, `as.integer()`, `as.double()`, `as.character()`과 같은 `as.*()` 함수를 사용해서 고의적으로 강제할 수 있습니다. 문자를 강제하는데 실패하는 경우 경고와 결측값이 생깁니다.
+
+```{r}
+as.integer(c("1", "1.5", "a"))
+```
+
+
+### Exercises
+
+1. raw와 complex scalar를 어떻게 만들 수 있을까요?
+
+2. 아래의 결과물을 예상하며 벡터 coercion에 대한 지식을 확인해보세요.
+```{r, eval=FALSE}
+c(1, FALSE)
+c("a", 1)
+c(TRUE, 1L)
+```
+
+3. 왜 `1 =="1"`이 참일까요? 왜 `-1 < FALSE`는 참일까요? 왜 `"one" < 2`는 거짓일까요?
+
+4. 왜 디폴트 `NA`는 논리형 벡터일까요? 논리형 벡터의 특별한 점은 무엇인가요?(힌트: `c(FALSE, NA_character_)`를 생각해보세요)
+
+5. 정확히 `is.atomic()`, `is.numeric()`, `is.vector()`는 무엇을 테스트하나요?
+
+
 ## Attributes
+
+아마 atomic 벡터 시리즈가 행렬, 배열, 팩터, 날짜-시간 데이터와 같이 많은 중요한 데이터 구조들을 포함하지 않는다는 사실을 눈치채셨을 것 같습니다. 이 타입들은 atomic 벡터에 속성(attributes)를 추가하여 구축됩니다. 이 Section에서는 속성의 기초와, 어떻게 차원(dim) 속성이 행렬과 배열을 만들어 내는지 배웁니다. 다음 Section에서 어떻게 클래스 속성이 팩터, 날짜, 날짜-시간과 같은 S3 벡터들을 만드는지 배우겠습니다.
+
+
+### Getting and setting
+
+속성이란 객체에 메타데이터를 더해주는 이름과 값의 쌍이라고 볼 수 있습니다. 개개의 속성들은 `attr()`를 사용하여 검색하거나 수정할 수 있고, `attributes()`를 사용하여 전체를 검색하고 `structure()`를 사용해서 일괄 설정할 수 있습니다.
+
+```{r}
+a <- 1:3
+attr(a, "x") <- "abcdef"
+attr(a, "x")
+
+attr(a, "y") <- 4:6
+str(attributes(a))
+
+# Or equivalently
+a <- structure(
+  1:3, 
+  x = "abcdef",
+  y = 4:6
+)
+str(attributes(a))
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/attr.png")
+```
+
+속성은 일반적으로는 일시적이라고 생각해야 합니다. 예를 들어, 대부분의 속성들은 대부분의 연산에 의해 사라집니다.
+
+```{r}
+attributes(a[1])
+attributes(sum(a))
+```
+
+일상적으로 보존되는 속성은 두가지 뿐입니다.
+
+* **이름(names)**: 각 요소에 이름을 부여하는 문자형 벡터입니다.
+* **차원(dim)**: dimensions의 약자로, 벡터를 행렬이나 배열로 만들어주는 정수형 벡터입니다.
+
+다른 속성들을 보존하기 위해선, Chapter 13의 주제인, S3 클래스를 만들어 사용해야 합니다.
+
+
+### Names
+
+세 가지 방식으로 벡터에 이름을 부여할 수 있습니다.
+
+```{r}
+# When creating it: 
+x <- c(a = 1, b = 2, c = 3)
+
+# By assigning a character vector to names()
+x <- 1:3
+names(x) <- c("a", "b", "c")
+
+# Inline, with setNames():
+x <- setNames(1:3, c("a", "b", "c"))
+```
+
+`attr(x, "names")`는 `names(x)`에 비해 타이핑도 많이 해야하고 가독성이 떨어지므로 사용을 피해주세요. `unname(x)` 또는 `names(x) <- NULL`을 사용해 벡터의 이름을 제거할 수도 있습니다.
+
+기술적으로 정확히 하기 위해, 이름이 있는 벡터 `x`를 그릴 때는 다음과 같이 그려야 합니다.
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/attr-names-1.png")
+```
+
+하지만 이름은 너무 특별하고 중요하기 때문에, 데이터의 속성 구조에 각별히 주의를 기울이지 않는 한은, 벡터에 직접 라벨을 주도록 하겠습니다.
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/attr-names-2.png")
+```
+
+문자를 이용한 서브 세팅의 편리를 위해, 이름은 고유해야하고 결측이 아니어야만 합니다. 하지만 이건 R이 강제하는 바는 아닙니다. 이름이 어떻게 설정되냐에 따라, 누락된 이름은 `""` 또는 `NA_character_`이 될 수도 있습니다. 만약 모든 이름이 누락되어 있다면, `names()`는 `NULL`을 반환합니다.
+
+
+### Dimensions
+
+`dim` 속성을 벡터에 추가하는 것은 벡터가 2차원 _행렬_이나 다차원 _배열_처럼 작동할 수 있게 해줍니다. 행렬과 배열은 주로 수학이나 통계학적 도구이지, 프로그래밍 도구는 아닙니다. 따라서 이들은 자주 사용되지는 않으므로 이 책에서는 간략히 다루겠습니다. 이것들의 가장 중요한 특징은 Section 4.2.3에서 다룰 다차원 세브세팅입니다.
+
+행렬과 배열을 만들기 위해서는 `matrix()`와 `array()`를 사용하거나, `dim()` 형태의 할당을 사용할 수 있습니다.
+
+```{r}
+# Two scalar arguments specify row and column sizes
+a <- matrix(1:6, nrow = 2, ncol = 3)
+a
+
+# One vector argument to describe all dimensions
+b <- array(1:12, c(2, 3, 2))
+b
+
+# You can also modify an object in place by setting dim()
+c <- 1:6
+dim(c) <- c(3, 2)
+c
+```
+
+벡터에 작동하는 많은 함수들은 행렬과 배열에도 일반화가 가능합니다.
+
+| Vector            | Matrix                     | Array            |
+|-------------------|----------------------------|------------------|
+| `names()`         | `rownames()`, `colnames()` | `dimnames()`     |
+| `length()`        | `nrow()`, `ncol()`         | `dim()`          |
+| `c()`             | `rbind()`, `cbind()`       | `abind::abind()` |
+| ---               | `t()`                      | `aperm()`        |
+| `is.null(dim(x))` | `is.matrix()`              | `is.array()`     |
+
+`dim` 속성이 없는 벡터는 1차원으로 생각되지만, 실제로는 `NULL` 차원입니다. 하나의 행이나 열을 가지는 행렬이나, 1차원인 배열도 만들 수 있습니다. 이들은 비슷하게 출력되지만, 다르게 동작합니다. 이 차이점들은 그리 중요하진 않지만, 알아두면 함수가 이상한 결과물을 뱉는 경우에 유용할 수 있습니다.(`tapply()`가 빈번히 이럽디다) 뭐 여느때와 마찬가지로, `str()`을 이용해서 차이점을 확인할 수 있습니다.
+
+```{r}
+str(1:3)                   # 1d vector
+str(matrix(1:3, ncol = 1)) # column vector
+str(matrix(1:3, nrow = 1)) # row vector
+str(array(1:3, 3))         # "array" vector
+```
+
+
+### Exercises
+
+1. `setNames()`와 `unname()`은 어떻게 구현되어 있습니까? 소스 코드를 읽어보세요.
+
+2. `dim()`이 1차원 벡터에게 적용되었을 때 무엇이 반환됩니까? `NROW()`나 `NCOL()`은 언제 사용하나요?
+
+3. 다음 세 객체를 어떻게 설명하시겠습니까? `1:5`와 다른 점이 무엇인가요?
+
+```{r}
+x1 <- array(1:5, c(1, 1, 5))
+x2 <- array(1:5, c(1, 5, 1))
+x3 <- array(1:5, c(5, 1, 1))
+```
+
+4. 초기 원고에서는 `structure()`를 표현하기 위해 이 코드를 사용했었습니다.
+
+```{r}
+structure(1:5, comment = "my attribute")
+```
+
+하지만 이 객체를 프린트하면 comment 속성을 볼 수 없습니다. 왜일까요? 속성이 누락된 것일까요? 아니면 뭔가 특별한 것이 있는 걸까요?(힌트: help를 사용해보세요)
+
+
 ## S3 atomic vectors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Lists
 ## Data frames and tibbles
 ## NULL
 ## Quiz answers
+## Summary
