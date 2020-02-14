@@ -383,47 +383,221 @@ structure(1:5, comment = "my attribute")
 
 ## S3 atomic vectors
 
+벡터의 가장 중요한 속성 중 하나는 S3 객체 시스템의 근간을 이루는 `class`입니다. 클래스 속성을 가지게 되면 객체가 **S3 객체**로 바뀝니다. 이는 **제네릭(generic)** 함수를 거쳤을 때, 일반적인 벡터와는 다른 행태를 보인다는 것을 의미합니다. 모든 S3 객체는 기본 타입을 기반으로 형성되고, 종종 다른 속성들에 대한 추가 정보를 저장하기도 합니다. Chapter 13에서 S3 객체 시스템에 대한 디테일과 어떻게 자신만의 S3 클래스를 만들 수 있는지 배울 것입니다.
+
+이 Section에서는, 베이스 R에서 사용되는 네 가지 중요한 S3 벡터들에 대해 논할 것입니다.
+
+* **팩터(factor)** 벡터에 기록된 정해진 레벨들의 후보에서 값이 비롯되는 범주형 데이터
+
+* **날짜(Date)** 벡터에 기록된 날짜들(요일 등까지도)
+
+* **POSIXct** 벡터들에 저장된 날짜-시간들(초 아래 단위까지도)
+
+* **difftime** 벡터에 저장된 지속기간들
+
+<img src="diagrams/vectors/summary-tree-s3-1.png" style="display: block; margin: auto;" />
 
 
+### Factors
+
+팩터는 사전에 정의된 값들만을 가질 수 있는 벡터입니다. 이는 범주형 데이터를 저장하는 데에 사용됩니다. 팩터는 정수형 벡터에 두가지 속성이 더해져 만들어집니다. 일반적인 정수형 벡터들과 다르게 동작하게 해주는 "팩터" `class`와, 허용된 값들을 정의하는 `levels`가 그것입니다.
 
 
+```r
+x <- factor(c("a", "b", "b", "a"))
+x
+#> [1] a b b a
+#> Levels: a b
+
+typeof(x)
+#> [1] "integer"
+attributes(x)
+#> $levels
+#> [1] "a" "b"
+#> 
+#> $class
+#> [1] "factor"
+```
+
+<img src="diagrams/vectors/factor.png" style="display: block; margin: auto;" />
+
+팩터는 가능한 값 세트를 알고 있지만, 그것들이 주어진 데이터셋이 전부 존재하지는 않을때 유용합니다. 문자형 벡터와는 다르게, 팩터를 표로 만들면 관찰되지 않은 값이라고 해도 모든 카테고리의 수를 얻을 수 있습니다.
 
 
+```r
+sex_char <- c("m", "m", "m")
+sex_factor <- factor(sex_char, levels = c("m", "f"))
+
+table(sex_char)
+#> sex_char
+#> m 
+#> 3
+table(sex_factor)
+#> sex_factor
+#> m f 
+#> 3 0
+```
+
+**순서형(Ordered)** 팩터는 팩터를 살짝 변형한 것입니다. 보통은 일반적인 팩터처럼 동작하지만, levels의 순서(low, medium, high)는 의미가 있습니다.(몇몇 모델이나 시각화 함수에서 자동으로 활용됩니다)
 
 
+```r
+grade <- ordered(c("b", "b", "a", "c"), levels = c("c", "b", "a"))
+grade
+#> [1] b b a c
+#> Levels: c < b < a
+```
+
+Base R에서는 (`read.csv()`, `data.frame()`과 같은) 많은 기본 R 함수들이 자동으로 문자형 벡터들을 팩터로 바꿔버리기 때문에, 팩터를 매우 자주 접하게 됩니다. 하지만 이는 차선잭인데, 이러한 함수들이 모든 가능한 levels와 그들의 정확한 순서를 알 도리가 없기 때문입니다. levels는 데이터가 아닌 이론이나 실험 설계의 속성입니다. 대신에, `stringAsFactors = FALSE` 인자를 사용하면 이러한 현상을 제어할 수 있고, "이론적인" 데이터 지식을 활용해 손수 문자형 벡터들을 팩터로 바꿔줄 수 있습니다. 이에 대한 역사적 맥락을 더 배우고 싶다면, Roger Peng의 [_stringsAsFactors: An unauthorized
+biography_](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/)와, Thomas Lumley의 [_stringsAsFactors = 
+\<sigh\>_](http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh)를 추천합니다.
+
+비록 팩터가 문자형 벡터처럼 생기고 동작하는 것처럼 보이지만, 정수형 벡터를 기반으로 한다는 것을 기억해야 합니다. 그러니까 이들을 문자열처럼 다룰 때는 주의하세요. `gsub()`나 `grepl()` 같은 몇몇 문자형 메소드들은 팩터를 문자열로 강제합니다. `nchar()`과 같은 애들은 에러를 내기도 하고, `c()` 같은 애들은 기저에 있는 정수형 벡터를 사용하기도 합니다. 이러한 이유로, 만약 문자열 같은 동작방식이 필요하다면, 명시적으로 팩터를 문자형 벡터로 바꿔 사용하는 것이 최선입니다.
 
 
+### Dates
+
+날짜 벡터는 실수형(double) 벡터를 기반으로 만들어집니다. 이것들은 "Date" class 속성만을 가집니다. 
+
+```r
+today <- Sys.Date()
+
+typeof(today)
+#> [1] "double"
+attributes(today)
+#> $class
+#> [1] "Date"
+```
+
+클래스를 제거하면 볼 수 있는 본래의 실수값은 1970-01-01로부터 흐른 날을 의미합니다.
 
 
+```r
+date <- as.Date("1970-02-01")
+unclass(date)
+#> [1] 31
+```
 
 
+### Dates-times
+
+Base R은 날짜-시간 정보를 저장할 수 있는 두 방법을 제공합니다. POSIXct와 POSIXlt입니다. 넘나리 이상한 "POSIX"란 이름은 플랫폼 간 표준의 일원인 Portable Operating System Interface의 약자입니다. "ct"는 calendar time(C언어에서 `time_t` 타입)을, "lt"는 local time(C언어에서 `struct tm` 타입)을 의미합니다. 여기에서는 `POSIXct`에 초점을 맞춰보겠습니다. 왜냐하면 이것은 가장 간단하고, atomic vector를 기반으로 만들어졌으며, 데이터 프레임에서 사용하기에 가장 적절하기 때문입니다. POSIXct 벡터는 1970-01-01로부터 흐른 초 수를 표현한 실수값 위에 만들어졌습니다.
 
 
+```r
+now_ct <- as.POSIXct("2018-08-01 22:00", tz = "UTC")
+now_ct
+#> [1] "2018-08-01 22:00:00 UTC"
+
+typeof(now_ct)
+#> [1] "double"
+attributes(now_ct)
+#> $class
+#> [1] "POSIXct" "POSIXt" 
+#> 
+#> $tzone
+#> [1] "UTC"
+```
+
+`tzone` 속성은 날짜-시간이 어떻게 포맷된 것인지를 제어합니다. 벡터에 의해 표현된 시간의 순간을 제어하진 않습니다. 자정이면 시간이 출력되지 않는다는 것은 알아두세요.
 
 
+```r
+structure(now_ct, tzone = "Asia/Tokyo")
+#> [1] "2018-08-02 07:00:00 JST"
+structure(now_ct, tzone = "America/New_York")
+#> [1] "2018-08-01 18:00:00 EDT"
+structure(now_ct, tzone = "Australia/Lord_Howe")
+#> [1] "2018-08-02 08:30:00 +1030"
+structure(now_ct, tzone = "Europe/Paris")
+#> [1] "2018-08-02 CEST"
+```
 
 
+### Durations
+
+날짜나 날짜-시간 데이터 쌍들 사이의 시간 간격을 의미하는 Durations는 시간차(difftimes) 안에 저장됩니다. Difftimes는 실수형 데이터로 구성되고, 정수가 어떻게 해석되어야 하는지 결정하는 `units` 속성을 가집니다.
 
 
+```r
+one_week_1 <- as.difftime(1, units = "weeks")
+one_week_1
+#> Time difference of 1 weeks
+
+typeof(one_week_1)
+#> [1] "double"
+attributes(one_week_1)
+#> $class
+#> [1] "difftime"
+#> 
+#> $units
+#> [1] "weeks"
+
+one_week_2 <- as.difftime(7, units = "days")
+one_week_2
+#> Time difference of 7 days
+
+typeof(one_week_2)
+#> [1] "double"
+attributes(one_week_2)
+#> $class
+#> [1] "difftime"
+#> 
+#> $units
+#> [1] "days"
+```
 
 
+### Exercises
+
+1. `table()`은 어떤 종류의 객체를 반환합니까? 또한 무슨 타입이며, 어떤 속성들을 가집니까? 당신이 더 많은 변수를 표로 만들면 차원은 어떻게 변합니까?
+
+2. levels를 수정하면 팩터에 무슨 일이 발생합니까?
 
 
+```r
+f1 <- factor(letters)
+levels(f1) <- rev(levels(f1))
+```
+
+3. 이 코드는 무엇을 합니까? `f2`와 `f3`는 `f1`과 어떻게 다른가요?
 
 
+```r
+f2 <- rev(factor(letters))
 
-
-
-
-
-
-
-
-
+f3 <- factor(letters, levels = rev(letters))
+```
 
 
 ## Lists
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Data frames and tibbles
 ## NULL
 ## Quiz answers
 ## Summary
+
+* 팩터 = 정수형 벡터 + <factor class + levels>
