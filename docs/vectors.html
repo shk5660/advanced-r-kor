@@ -24,7 +24,7 @@
 <meta name="author" content="Jsang" />
 
 
-<meta name="date" content="2020-02-14" />
+<meta name="date" content="2020-02-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,8 +188,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.4" data-path="vectors.html"><a href="vectors.html#durations"><i class="fa fa-check"></i><b>3.4.4</b> Durations</a></li>
 <li class="chapter" data-level="3.4.5" data-path="vectors.html"><a href="vectors.html#exercises-6"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="vectors.html"><a href="vectors.html#lists-1"><i class="fa fa-check"></i><b>3.5</b> Lists</a></li>
-<li class="chapter" data-level="3.6" data-path="vectors.html"><a href="vectors.html#data-frames-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Data frames and tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="vectors.html"><a href="vectors.html#lists-1"><i class="fa fa-check"></i><b>3.5</b> Lists</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="vectors.html"><a href="vectors.html#creating"><i class="fa fa-check"></i><b>3.5.1</b> Creating</a></li>
+<li class="chapter" data-level="3.5.2" data-path="vectors.html"><a href="vectors.html#testing-and-coercion-1"><i class="fa fa-check"></i><b>3.5.2</b> Testing and coercion</a></li>
+<li class="chapter" data-level="3.5.3" data-path="vectors.html"><a href="vectors.html#matrices-and-arrays"><i class="fa fa-check"></i><b>3.5.3</b> Matrices and arrays</a></li>
+<li class="chapter" data-level="3.5.4" data-path="vectors.html"><a href="vectors.html#exercises-7"><i class="fa fa-check"></i><b>3.5.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="vectors.html"><a href="vectors.html#data-frames-and-tibbles"><i class="fa fa-check"></i><b>3.6</b> Data frames and tibbles</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="vectors.html"><a href="vectors.html#creating-1"><i class="fa fa-check"></i><b>3.6.1</b> Creating</a></li>
+<li class="chapter" data-level="3.6.2" data-path="vectors.html"><a href="vectors.html#row-names"><i class="fa fa-check"></i><b>3.6.2</b> Row names</a></li>
+<li class="chapter" data-level="3.6.3" data-path="vectors.html"><a href="vectors.html#printing"><i class="fa fa-check"></i><b>3.6.3</b> Printing</a></li>
+<li class="chapter" data-level="3.6.4" data-path="vectors.html"><a href="vectors.html#subsetting"><i class="fa fa-check"></i><b>3.6.4</b> Subsetting</a></li>
+<li class="chapter" data-level="3.6.5" data-path="vectors.html"><a href="vectors.html#testing-and-coercing"><i class="fa fa-check"></i><b>3.6.5</b> Testing and coercing</a></li>
+<li class="chapter" data-level="3.6.6" data-path="vectors.html"><a href="vectors.html#list-columns"><i class="fa fa-check"></i><b>3.6.6</b> List columns</a></li>
+<li class="chapter" data-level="3.6.7" data-path="vectors.html"><a href="vectors.html#matrix-and-data-frame-columns"><i class="fa fa-check"></i><b>3.6.7</b> Matrix and data frame columns</a></li>
+<li class="chapter" data-level="3.6.8" data-path="vectors.html"><a href="vectors.html#exercises-8"><i class="fa fa-check"></i><b>3.6.8</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="vectors.html"><a href="vectors.html#null"><i class="fa fa-check"></i><b>3.7</b> NULL</a></li>
 <li class="chapter" data-level="3.8" data-path="vectors.html"><a href="vectors.html#quiz-answers-1"><i class="fa fa-check"></i><b>3.8</b> Quiz answers</a></li>
 <li class="chapter" data-level="3.9" data-path="vectors.html"><a href="vectors.html#summary-1"><i class="fa fa-check"></i><b>3.9</b> Summary</a></li>
@@ -640,20 +654,425 @@ biography</em></a>와, Thomas Lumley의 <a href="http://notstatschat.tumblr.com/
 </div>
 <div id="lists-1" class="section level2">
 <h2><span class="header-section-number">3.5</span> Lists</h2>
+<p>리스트는 atomic 벡터에 비해 더 복잡합니다. 각 원소는 벡터 뿐 아니라 어떤 타입이든 될 수 있습니다. 기술적으로 엄밀히 따지면, 리스트의 각 원소들은 사실 같은 타입이긴합니다. Section 2.3.3에서 보았듯이, 각 원소들은 다른 객체(어떤 타입이든 될 수 있는)에 대한 _참조_이기 때문입니다.</p>
+<div id="creating" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Creating</h3>
+<p><code>list()</code>로 리스트를 만들 수 있습니다.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">l1 &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb82-2" title="2">  <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb82-3" title="3">  <span class="st">&quot;a&quot;</span>, </a>
+<a class="sourceLine" id="cb82-4" title="4">  <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb82-5" title="5">  <span class="kw">c</span>(<span class="fl">2.3</span>, <span class="fl">5.9</span>)</a>
+<a class="sourceLine" id="cb82-6" title="6">)</a>
+<a class="sourceLine" id="cb82-7" title="7"></a>
+<a class="sourceLine" id="cb82-8" title="8"><span class="kw">typeof</span>(l1)</a>
+<a class="sourceLine" id="cb82-9" title="9"><span class="co">#&gt; [1] &quot;list&quot;</span></a>
+<a class="sourceLine" id="cb82-10" title="10"></a>
+<a class="sourceLine" id="cb82-11" title="11"><span class="kw">str</span>(l1)</a>
+<a class="sourceLine" id="cb82-12" title="12"><span class="co">#&gt; List of 4</span></a>
+<a class="sourceLine" id="cb82-13" title="13"><span class="co">#&gt;  $ : int [1:3] 1 2 3</span></a>
+<a class="sourceLine" id="cb82-14" title="14"><span class="co">#&gt;  $ : chr &quot;a&quot;</span></a>
+<a class="sourceLine" id="cb82-15" title="15"><span class="co">#&gt;  $ : logi [1:3] TRUE FALSE TRUE</span></a>
+<a class="sourceLine" id="cb82-16" title="16"><span class="co">#&gt;  $ : num [1:2] 2.3 5.9</span></a></code></pre></div>
+<p>리스트의 원소는 참조들이라서, 리스트를 만들 때에는 컴포넌트들을 리스트에 복사하지 않아도 됩니다. 따라서 리스트의 총 크기는 예상했던 것보다 아마 작을 것입니다.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">lobstr<span class="op">::</span><span class="kw">obj_size</span>(mtcars)</a>
+<a class="sourceLine" id="cb83-2" title="2"><span class="co">#&gt; 7,208 B</span></a>
+<a class="sourceLine" id="cb83-3" title="3"></a>
+<a class="sourceLine" id="cb83-4" title="4">l2 &lt;-<span class="st"> </span><span class="kw">list</span>(mtcars, mtcars, mtcars, mtcars)</a>
+<a class="sourceLine" id="cb83-5" title="5">lobstr<span class="op">::</span><span class="kw">obj_size</span>(l2)</a>
+<a class="sourceLine" id="cb83-6" title="6"><span class="co">#&gt; 7,288 B</span></a></code></pre></div>
+<p>리스트는 복합적인 객체들을 담을 수 있기 때문에, 모든 리스트에 적용될 수 있는 하나의 시각적인 표현법을 고르기는 불가능합니다. 계층을 표현하기 위해 색을 이용하여, 벡터처럼 리스트를 표현해보도록 하겠습니다.</p>
+<p><img src="diagrams/vectors/list.png" style="display: block; margin: auto;" /></p>
+<p>리스트는 가끔 <strong>재귀(reculsive)</strong> 벡터라고 불리기도 하는데, 리스트는 다른 리스트를 담을 수 있기 때문입니다. 이런 부분이 리스트와 atomic 벡터가 근본적으로 다른 지점입니다.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">l3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">1</span>)))</a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="kw">str</span>(l3)</a>
+<a class="sourceLine" id="cb84-3" title="3"><span class="co">#&gt; List of 1</span></a>
+<a class="sourceLine" id="cb84-4" title="4"><span class="co">#&gt;  $ :List of 1</span></a>
+<a class="sourceLine" id="cb84-5" title="5"><span class="co">#&gt;   ..$ :List of 1</span></a>
+<a class="sourceLine" id="cb84-6" title="6"><span class="co">#&gt;   .. ..$ : num 1</span></a></code></pre></div>
+<p><img src="diagrams/vectors/list-recursive.png" style="display: block; margin: auto;" /></p>
+<p><code>c()</code>는 여러 리스트들을 하나로 합쳐줍니다. 만약 atomic 벡터와 리스트의 결합이 주어진다면, <code>c()</code>는 이들을 결합하기 전에 벡터들을 리스트로 강제합니다. <code>list()</code>와 <code>c()</code>의 결과물을 비교해보세요.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">l4 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb85-2" title="2">l5 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="kw">str</span>(l4)</a>
+<a class="sourceLine" id="cb85-4" title="4"><span class="co">#&gt; List of 2</span></a>
+<a class="sourceLine" id="cb85-5" title="5"><span class="co">#&gt;  $ :List of 2</span></a>
+<a class="sourceLine" id="cb85-6" title="6"><span class="co">#&gt;   ..$ : num 1</span></a>
+<a class="sourceLine" id="cb85-7" title="7"><span class="co">#&gt;   ..$ : num 2</span></a>
+<a class="sourceLine" id="cb85-8" title="8"><span class="co">#&gt;  $ : num [1:2] 3 4</span></a>
+<a class="sourceLine" id="cb85-9" title="9"><span class="kw">str</span>(l5)</a>
+<a class="sourceLine" id="cb85-10" title="10"><span class="co">#&gt; List of 4</span></a>
+<a class="sourceLine" id="cb85-11" title="11"><span class="co">#&gt;  $ : num 1</span></a>
+<a class="sourceLine" id="cb85-12" title="12"><span class="co">#&gt;  $ : num 2</span></a>
+<a class="sourceLine" id="cb85-13" title="13"><span class="co">#&gt;  $ : num 3</span></a>
+<a class="sourceLine" id="cb85-14" title="14"><span class="co">#&gt;  $ : num 4</span></a></code></pre></div>
+<p><img src="diagrams/vectors/list-c.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="testing-and-coercion-1" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Testing and coercion</h3>
+<p>리스트의 <code>typeof()</code>는 <code>list</code>입니다. <code>is.list()</code>를 이용해서 리스트인지 테스트할 수 있고, <code>as.list()</code>를 이용해서 리스트로 강제할 수 있습니다.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb86-3" title="3"><span class="co">#&gt; [1] 1 2 3</span></a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="kw">as.list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb86-5" title="5"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb86-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb86-8" title="8"><span class="co">#&gt; [[2]]</span></a>
+<a class="sourceLine" id="cb86-9" title="9"><span class="co">#&gt; [1] 2</span></a>
+<a class="sourceLine" id="cb86-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb86-11" title="11"><span class="co">#&gt; [[3]]</span></a>
+<a class="sourceLine" id="cb86-12" title="12"><span class="co">#&gt; [1] 3</span></a></code></pre></div>
+<p><code>unlist()</code>를 사용하면 리스트를 atomic 벡터로 바꿀 수 있습니다. 이 결과에 대한 룰은 복잡하며, 잘 문서화 되어있지도 않고, <code>c()</code>의 결과물가 항상 일치하지도 않습니다.</p>
+</div>
+<div id="matrices-and-arrays" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Matrices and arrays</h3>
+<p>atomic 벡터에서는 차원 속성이 행렬을 만드는 데 흔히 사용됩니다. 리스트에서는 차원 속성을 이용해 리스트-행렬이나 리스트-배열을 만들 수 있습니다.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>, <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="kw">dim</span>(l) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb87-3" title="3">l</a>
+<a class="sourceLine" id="cb87-4" title="4"><span class="co">#&gt;      [,1]      [,2]</span></a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="co">#&gt; [1,] Integer,3 TRUE</span></a>
+<a class="sourceLine" id="cb87-6" title="6"><span class="co">#&gt; [2,] &quot;a&quot;       1</span></a>
+<a class="sourceLine" id="cb87-7" title="7"></a>
+<a class="sourceLine" id="cb87-8" title="8">l[[<span class="dv">1</span>, <span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb87-9" title="9"><span class="co">#&gt; [1] 1 2 3</span></a></code></pre></div>
+<p>이러한 데이터 구조들은 상대적으로 난해해보이지만, 객체들을 grid-like 구조로 나열하고 싶을 때 유용합니다. 예를 들어, 시공간 grid에 맞추어 모델을 돌리고 싶을 때, 모델들을 grid 구조에 맞는 3D 배열에 저장하는 것이 더 직관적일 수 있습니다.</p>
+</div>
+<div id="exercises-7" class="section level3">
+<h3><span class="header-section-number">3.5.4</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>리스트가 atomic 벡터와 다른 모든 방식을 나열해보세요.</p></li>
+<li><p>리스트를 atomic 벡터로 바꾸기 위해 왜 <code>unlist()</code>를 사용할 필요가 있을까요? 왜 <code>as.vector()</code>는 작동하지 않을까요?</p></li>
+<li><p>날짜와 날짜-시간 데이터를 하나의 벡터로 합칠 때, <code>c()</code>와 <code>unlist()</code>를 비교해보세요.</p></li>
+</ol>
+</div>
 </div>
 <div id="data-frames-and-tibbles" class="section level2">
 <h2><span class="header-section-number">3.6</span> Data frames and tibbles</h2>
+<p>리스트를 기반으로 만들어진 가장 중요한 두 S3 벡터는, 데이터 프레임과 티블(tibbles)입니다.</p>
+<p><img src="diagrams/vectors/summary-tree-s3-2.png" style="display: block; margin: auto;" /></p>
+<p>R로 데이터 분석을 한다면, 데이터 프레임을 이용하게 될 것입니다. 데이터 프레임은 (열)<code>names</code>, <code>row.names()</code> 속성과 “data.frame” 클래스를 가지는 이름 붙여진 리스트입니다.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="kw">typeof</span>(df1)</a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="co">#&gt; [1] &quot;list&quot;</span></a>
+<a class="sourceLine" id="cb88-4" title="4"></a>
+<a class="sourceLine" id="cb88-5" title="5"><span class="kw">attributes</span>(df1)</a>
+<a class="sourceLine" id="cb88-6" title="6"><span class="co">#&gt; $names</span></a>
+<a class="sourceLine" id="cb88-7" title="7"><span class="co">#&gt; [1] &quot;x&quot; &quot;y&quot;</span></a>
+<a class="sourceLine" id="cb88-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb88-9" title="9"><span class="co">#&gt; $class</span></a>
+<a class="sourceLine" id="cb88-10" title="10"><span class="co">#&gt; [1] &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb88-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb88-12" title="12"><span class="co">#&gt; $row.names</span></a>
+<a class="sourceLine" id="cb88-13" title="13"><span class="co">#&gt; [1] 1 2 3</span></a></code></pre></div>
+<p>보통의 리스트와는 다르게, 데이터 프레임에는 추가적인 제한 사항이 있는데, 그것이 가지는 벡터들의 길이가 반드시 같아야 한다는 것입니다. 이 점이 데이터 프레임이 직사각형 구조를 띄게 하고, 이들이 행렬과 리스트의 성질을 동시에 가지는 것을 설명해줍니다.</p>
+<ul>
+<li><p>데이터 프레임은 <code>rownames()</code>와 <code>colnames()</code>를 갖습니다. 데이터 프레임의 <code>names()</code>는 열 이름을 의미합니다.</p></li>
+<li><p>데이터 프레임은 <code>nrow()</code>와 <code>ncol()</code>를 갖습니다. 데이터 프레임의 <code>length()</code>는 열의 수를 뜻합니다.</p></li>
+</ul>
+<p>데이터 프레임은 R에서 가장 커다랗고 중요한 아이디어 중 하나입니다. 그리고 R을 다른 프로그래밍 언어들과 차별되게 만들어 준 것들 중 하나이죠.</p>
+<p>하지만 이것이 만들어진지 20년이 넘게 흘러, 사람들이 R을 사용하는 방식이 변했고, 데이터 프레임이 만들어진 당시에는 괜찮았던 것들이 지금은 문제를 일으키기도 합니다.</p>
+<p>이런 문제들이 데이터 프레임을 현대적으로 재디자인한 티블(tibble)의 창조를 이끌었습니다. Tibbles are designed to be (as much as possible) drop-in replacements for data frames that fix those frustrations. 주요한 차이점을 요약하는 간결하고 재미있는 표현은, 티블은 ’게으르(lazy)’고 ’거칠다(surly)’는 것입니다. 이번 Section을 따라가며 무슨 의미인지 보게 될 것입니다.</p>
+<p>티블은 티블 패키지에 의해 제공되고 데이터 프레임과 동일한 구조를 공유합니다. 유일한 차이점은 클래스 벡터가 더 길고, <code>tbl_df</code>를 포함하고 있다는 점입니다. 이를 통해 티블이 중요한 방식으로 다르게 동작할 있습니다. 아래에서 더 알아보겠습니다.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb89-2" title="2"></a>
+<a class="sourceLine" id="cb89-3" title="3">df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb89-4" title="4"><span class="kw">typeof</span>(df2)</a>
+<a class="sourceLine" id="cb89-5" title="5"><span class="co">#&gt; [1] &quot;list&quot;</span></a>
+<a class="sourceLine" id="cb89-6" title="6"></a>
+<a class="sourceLine" id="cb89-7" title="7"><span class="kw">attributes</span>(df2)</a>
+<a class="sourceLine" id="cb89-8" title="8"><span class="co">#&gt; $names</span></a>
+<a class="sourceLine" id="cb89-9" title="9"><span class="co">#&gt; [1] &quot;x&quot; &quot;y&quot;</span></a>
+<a class="sourceLine" id="cb89-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb89-11" title="11"><span class="co">#&gt; $row.names</span></a>
+<a class="sourceLine" id="cb89-12" title="12"><span class="co">#&gt; [1] 1 2 3</span></a>
+<a class="sourceLine" id="cb89-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb89-14" title="14"><span class="co">#&gt; $class</span></a>
+<a class="sourceLine" id="cb89-15" title="15"><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></a></code></pre></div>
+<div id="creating-1" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Creating</h3>
+<p><code>data.frame()</code>에 이름 벡터 쌍을 넣어서 데이터 프레임을 생성할 수 있습니다.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb90-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb90-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb90-4" title="4">)</a>
+<a class="sourceLine" id="cb90-5" title="5"><span class="kw">str</span>(df)</a>
+<a class="sourceLine" id="cb90-6" title="6"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb90-7" title="7"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
+<a class="sourceLine" id="cb90-8" title="8"><span class="co">#&gt;  $ y: Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 2 3</span></a></code></pre></div>
+<p>디폴트로 문자열을 팩터로 바꿔버리는 것에 주의하세요. <code>stringAsFactors = FALSE</code>를 사용해서 이런 일을 방지하고 문자형 벡터를 문자형 벡터로 보존하세요.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb91-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb91-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
+<a class="sourceLine" id="cb91-4" title="4">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb91-5" title="5">)</a>
+<a class="sourceLine" id="cb91-6" title="6"><span class="kw">str</span>(df1)</a>
+<a class="sourceLine" id="cb91-7" title="7"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb91-8" title="8"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
+<a class="sourceLine" id="cb91-9" title="9"><span class="co">#&gt;  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></a></code></pre></div>
+<p>티블을 만드는 것은 데이터 프레임을 만드는 것과 비슷합니다. 둘의 차이점은 티블은 절대 입력값을 강제하지 않는다는 것이죠.(이것이 티블을 ‘게으르게’ 만드는 특징 중 하나입니다)</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb92-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb92-3" title="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb92-4" title="4">)</a>
+<a class="sourceLine" id="cb92-5" title="5"><span class="kw">str</span>(df2)</a>
+<a class="sourceLine" id="cb92-6" title="6"><span class="co">#&gt; Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    3 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb92-7" title="7"><span class="co">#&gt;  $ x: int  1 2 3</span></a>
+<a class="sourceLine" id="cb92-8" title="8"><span class="co">#&gt;  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></a></code></pre></div>
+<p>또한 데이터 프레임은 자동으로 non-syntactic한 이름을 바꿔버리지만(<code>check.names = FALSE</code>를 하지 않는한), 티블은 그렇게 하지 않습니다.(대신 non-syntactic한 이름을 <code>`</code>으로 감싸줍니다)</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">names</span>(<span class="kw">data.frame</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="co">#&gt; [1] &quot;X1&quot;</span></a>
+<a class="sourceLine" id="cb93-3" title="3"></a>
+<a class="sourceLine" id="cb93-4" title="4"><span class="kw">names</span>(<span class="kw">tibble</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb93-5" title="5"><span class="co">#&gt; [1] &quot;1&quot;</span></a></code></pre></div>
+<p>데이터 프레임(또는 티블)은 반드시 모든 원소가 같은 길이를 가져야 하지만, <code>data.frame()</code>과 <code>tibble()</code>은 짧은 입력값을 재활용합니다. 하지만 데이터 프레임이 자동으로 정수배로 열들을 재활용하는 반면, 티블은 오직 길이 1짜리 벡터들만 재활용합니다.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb94-2" title="2"><span class="co">#&gt;   x y</span></a>
+<a class="sourceLine" id="cb94-3" title="3"><span class="co">#&gt; 1 1 1</span></a>
+<a class="sourceLine" id="cb94-4" title="4"><span class="co">#&gt; 2 2 2</span></a>
+<a class="sourceLine" id="cb94-5" title="5"><span class="co">#&gt; 3 3 1</span></a>
+<a class="sourceLine" id="cb94-6" title="6"><span class="co">#&gt; 4 4 2</span></a>
+<a class="sourceLine" id="cb94-7" title="7"><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb94-8" title="8"><span class="co">#&gt; Error in data.frame(x = 1:4, y = 1:3): arguments imply differing number of</span></a>
+<a class="sourceLine" id="cb94-9" title="9"><span class="co">#&gt; rows: 4, 3</span></a>
+<a class="sourceLine" id="cb94-10" title="10"></a>
+<a class="sourceLine" id="cb94-11" title="11"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb94-12" title="12"><span class="co">#&gt; # A tibble: 4 x 2</span></a>
+<a class="sourceLine" id="cb94-13" title="13"><span class="co">#&gt;       x     y</span></a>
+<a class="sourceLine" id="cb94-14" title="14"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb94-15" title="15"><span class="co">#&gt; 1     1     1</span></a>
+<a class="sourceLine" id="cb94-16" title="16"><span class="co">#&gt; 2     2     1</span></a>
+<a class="sourceLine" id="cb94-17" title="17"><span class="co">#&gt; 3     3     1</span></a>
+<a class="sourceLine" id="cb94-18" title="18"><span class="co">#&gt; 4     4     1</span></a>
+<a class="sourceLine" id="cb94-19" title="19"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb94-20" title="20"><span class="co">#&gt; Error: Tibble columns must have consistent lengths, only values of length one</span></a>
+<a class="sourceLine" id="cb94-21" title="21"><span class="co">#&gt; are recycled:</span></a>
+<a class="sourceLine" id="cb94-22" title="22"><span class="co">#&gt; * Length 2: Column `y`</span></a>
+<a class="sourceLine" id="cb94-23" title="23"><span class="co">#&gt; * Length 4: Column `x`</span></a></code></pre></div>
+<p>마지막 차이점은, <code>tibble()</code>은 티블을 생성하는 도중에 만들어진 변수를 참조할 수 있다는 것입니다.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb95-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb95-3" title="3">  <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb95-4" title="4">)</a>
+<a class="sourceLine" id="cb95-5" title="5"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb95-6" title="6"><span class="co">#&gt;       x     y</span></a>
+<a class="sourceLine" id="cb95-7" title="7"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb95-8" title="8"><span class="co">#&gt; 1     1     2</span></a>
+<a class="sourceLine" id="cb95-9" title="9"><span class="co">#&gt; 2     2     4</span></a>
+<a class="sourceLine" id="cb95-10" title="10"><span class="co">#&gt; 3     3     6</span></a></code></pre></div>
+<p>(입력값은 왼쪽에서 오른쪽으로 계산됩니다.)</p>
+<p>데이터 프레임과 티블을 그릴 때, 속성 같은 내부적 디테일들에 집중하기 보단,</p>
+<p><img src="diagrams/vectors/data-frame-1.png" style="display: block; margin: auto;" /></p>
+<p>이름 붙인 리스트와 같은 방식으로 표현하겠습니다. 대신 이들의 컬럼 구조를 강조해주겠습니다.</p>
+<p><img src="diagrams/vectors/data-frame-2.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="row-names" class="section level3">
+<h3><span class="header-section-number">3.6.2</span> Row names</h3>
+<p>데이터 프레임에서는 각 행에 이름을 붙일 수 있습니다. 문자형 벡터는 고유한 값들만을 담아야합니다.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">df3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb96-2" title="2">  <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">35</span>, <span class="dv">27</span>, <span class="dv">18</span>),</a>
+<a class="sourceLine" id="cb96-3" title="3">  <span class="dt">hair =</span> <span class="kw">c</span>(<span class="st">&quot;blond&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;black&quot;</span>),</a>
+<a class="sourceLine" id="cb96-4" title="4">  <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Susan&quot;</span>, <span class="st">&quot;Sam&quot;</span>)</a>
+<a class="sourceLine" id="cb96-5" title="5">)</a>
+<a class="sourceLine" id="cb96-6" title="6">df3</a>
+<a class="sourceLine" id="cb96-7" title="7"><span class="co">#&gt;       age  hair</span></a>
+<a class="sourceLine" id="cb96-8" title="8"><span class="co">#&gt; Bob    35 blond</span></a>
+<a class="sourceLine" id="cb96-9" title="9"><span class="co">#&gt; Susan  27 brown</span></a>
+<a class="sourceLine" id="cb96-10" title="10"><span class="co">#&gt; Sam    18 black</span></a></code></pre></div>
+<p><code>rownames()</code>로 행 이름을 확인하거나 설정할 수 있고, 이를 행을 추출할 때 사용할 수 있습니다.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">rownames</span>(df3)</a>
+<a class="sourceLine" id="cb97-2" title="2"><span class="co">#&gt; [1] &quot;Bob&quot;   &quot;Susan&quot; &quot;Sam&quot;</span></a>
+<a class="sourceLine" id="cb97-3" title="3"></a>
+<a class="sourceLine" id="cb97-4" title="4">df3[<span class="st">&quot;Bob&quot;</span>, ]</a>
+<a class="sourceLine" id="cb97-5" title="5"><span class="co">#&gt;     age  hair</span></a>
+<a class="sourceLine" id="cb97-6" title="6"><span class="co">#&gt; Bob  35 blond</span></a></code></pre></div>
+<p>데이터 프레임을 행렬과 같은 2차원 구조라고 생각하면 행 이름은 자연스운 것입니다. 열(변수)가 이름이 있으니, 행(관측치)도 있어야 하는게 당연해보이죠. 행렬은 대개 숫자형입니다. 때문에 문자 레이블을 저장할 장소를 마련하는게 중요하죠. 하지만 행렬로부터 이렇게 유추하는 것은 오해의 소지가 있습니다. 왜냐하면 행렬은 데이터 프레임에겐 없는 중요한 특징을 갖고 있기 때문입니다. 바로 ’전치(transpose)’가 가능하단 점입니다. 행렬에선 행과 열이 상호 교환가능합니다. 또 행렬을 전치시키면 다른 행렬이 됩니다.(다시 전치시키면 원래의 행렬을 얻게 되겠죠) 하지만 데이터 프레임은 행과 열이 교환가능하지 않습니다. 데이터 프레임을 전치시키면 데이터 프레임이 아니게 됩니다.</p>
+<p>행 이름은 사용하지 않는 것이 바람직한데, 이에는 세 가지 이유가 있습니다.</p>
+<ul>
+<li><p>메타데이터는 그 자체로 데이터입니다. 그렇기 때문에, 다른 데이터와 다른 방식으로 저장하려고 하는 것은 근본적으로 안 좋은 아이디어입니다. 또한 열을 다루기 위해 당신이 기존에 가지고 있는 지식을 활용할 수 없게되니, 행 이름만을 작업하기 위해 새로운 도구들을 배워야만 한다는 의미도 되겠죠.</p></li>
+<li><p>행 이름은 행을 라벨링하는 방식 중 아주 별로인 방법입니다. 왜냐하면 행이 하나의 문자열에 의해서 식별 가능할 때에만 작동하기 때문입니다. 이는 많은 상황에서 실패할텐데, 예를 들면 어느 ’시점’과 같은 문자열이 아닌 벡터에 의해 행이 식별되기 원할 때나, 경도 위도로 표현된 위치 같은 여러 벡터로 식별되어야 할 때 등이 있겠습니다.</p></li>
+<li><p>행 이름은 반드시 고유해야 합니다. 그래서 중복되는 행이 있으면(부트스트래핑에서 왔다든지) 새로운 행 이름이 만들어집니다. 만약 변환하기 전 후의 행을 일치시키려면 골치아픈 문자열 작업을 해야만 할 겁니다.</p></li>
+</ul>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">df3[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), ]</a>
+<a class="sourceLine" id="cb98-2" title="2"><span class="co">#&gt;       age  hair</span></a>
+<a class="sourceLine" id="cb98-3" title="3"><span class="co">#&gt; Bob    35 blond</span></a>
+<a class="sourceLine" id="cb98-4" title="4"><span class="co">#&gt; Bob.1  35 blond</span></a>
+<a class="sourceLine" id="cb98-5" title="5"><span class="co">#&gt; Bob.2  35 blond</span></a></code></pre></div>
+<p>이러한 이유 때문에 티블은 행 이름을 지원하지 않습니다. 대신에 티블 패키지는 손쉽게 행 이름을 일반적인 열로 변화시킬 수 있는 <code>rownames_to_column()</code>이나 <code>as_tibble()</code>의 <code>rownames</code> 인자 같은 툴을 제공합니다.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">as_tibble</span>(df3, <span class="dt">rownames =</span> <span class="st">&quot;name&quot;</span>)</a>
+<a class="sourceLine" id="cb99-2" title="2"><span class="co">#&gt; # A tibble: 3 x 3</span></a>
+<a class="sourceLine" id="cb99-3" title="3"><span class="co">#&gt;   name    age hair </span></a>
+<a class="sourceLine" id="cb99-4" title="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;fct&gt;</span></a>
+<a class="sourceLine" id="cb99-5" title="5"><span class="co">#&gt; 1 Bob      35 blond</span></a>
+<a class="sourceLine" id="cb99-6" title="6"><span class="co">#&gt; 2 Susan    27 brown</span></a>
+<a class="sourceLine" id="cb99-7" title="7"><span class="co">#&gt; 3 Sam      18 black</span></a></code></pre></div>
+</div>
+<div id="printing" class="section level3">
+<h3><span class="header-section-number">3.6.3</span> Printing</h3>
+<p>티블과 데이터 프레임의 가장 명확한 차이점 중 하나는 그들이 출력되는 방식입니다. 아마 여러분은 데이터 프레임이 어떻게 출력되는 지는 익숙하실 겁니다. dplyr 패키지에 들어있는 예제 데이터를 사용해서 가장 큰 차이점을 보여드리겠습니다.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">dplyr<span class="op">::</span>starwars</a>
+<a class="sourceLine" id="cb100-2" title="2"><span class="co">#&gt; # A tibble: 87 x 13</span></a>
+<a class="sourceLine" id="cb100-3" title="3"><span class="co">#&gt;    name  height  mass hair_color skin_color eye_color birth_year gender</span></a>
+<a class="sourceLine" id="cb100-4" title="4"><span class="co">#&gt;    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb100-5" title="5"><span class="co">#&gt;  1 Luke…    172    77 blond      fair       blue            19   male  </span></a>
+<a class="sourceLine" id="cb100-6" title="6"><span class="co">#&gt;  2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112   &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb100-7" title="7"><span class="co">#&gt;  3 R2-D2     96    32 &lt;NA&gt;       white, bl… red             33   &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb100-8" title="8"><span class="co">#&gt;  4 Dart…    202   136 none       white      yellow          41.9 male  </span></a>
+<a class="sourceLine" id="cb100-9" title="9"><span class="co">#&gt;  5 Leia…    150    49 brown      light      brown           19   female</span></a>
+<a class="sourceLine" id="cb100-10" title="10"><span class="co">#&gt;  6 Owen…    178   120 brown, gr… light      blue            52   male  </span></a>
+<a class="sourceLine" id="cb100-11" title="11"><span class="co">#&gt;  7 Beru…    165    75 brown      light      blue            47   female</span></a>
+<a class="sourceLine" id="cb100-12" title="12"><span class="co">#&gt;  8 R5-D4     97    32 &lt;NA&gt;       white, red red             NA   &lt;NA&gt;  </span></a>
+<a class="sourceLine" id="cb100-13" title="13"><span class="co">#&gt;  9 Bigg…    183    84 black      light      brown           24   male  </span></a>
+<a class="sourceLine" id="cb100-14" title="14"><span class="co">#&gt; 10 Obi-…    182    77 auburn, w… fair       blue-gray       57   male  </span></a>
+<a class="sourceLine" id="cb100-15" title="15"><span class="co">#&gt; # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb100-16" title="16"><span class="co">#&gt; #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</span></a></code></pre></div>
+<ul>
+<li><p>티블은 첫 10개 행과 스크린에 맞는 열들만을 보여줍니다. 추가 열들은 아래에 보여집니다.</p></li>
+<li><p>각 열들은 세, 네글자로 축약된 타입 이름과 함께 표기됩니다.</p></li>
+<li><p>하나의 긴 문자열이 행 전체를 차지해버리는 것을 방지하기 위해, 넓은(관측치 길이가 긴) 열들은 잘립니다.</p></li>
+<li><p>지원되는 콘솔 환경에서 사용할 때, 중요한 정보를 강조하거나 덜 중요한 세부 사항을 강조하지 않기 위해, 신중하게 색깔이 표현됩니다.</p></li>
+</ul>
+</div>
+<div id="subsetting" class="section level3">
+<h3><span class="header-section-number">3.6.4</span> Subsetting</h3>
+<p>Chapter 4에서 배우겠지만, 데이터 프레임이나 티블은 1D 구조(리스트처럼 동작하는)처럼 서브셋하거나, 2D 구조(행렬처럼 동작하는)처럼 서브셋할 수 있습니다.</p>
+<p>제 생각엔, 데이터 프레임에게는 바람직하지 못한 서브셋 작동방식 두 가지가 있습니다.</p>
+<ul>
+<li><p><code>df[, vars]</code>로 열을 서브셋할 때, <code>vars</code>가 한 개 변수를 선택하면 벡터를 얻게 되고, 그렇지 않으면 데이터 프레임을 얻게 됩니다. 만약 <code>df[, vars, drop = FALSE]</code>를 사용하는 것을 항상 기억하지 않는 한, 함수에 <code>[</code>를 사용하는 것은 잦은 버그의 원인이 됩니다.</p></li>
+<li><p><code>df$x</code>로 열 하나를 뽑아내려는데 <code>x</code>라는 열이 없다면, 대신 데이터 프레임은 <code>x</code>로 시작하는 아무 변수나 골라줍니다. 만약 <code>x</code>로 시작하는 변수가 없으면, <code>df$x</code>는 <code>NULL</code>을 반환합니다. 이는 잘못된 변수나 존재하지 않는 변수를 선택하기 쉬워집니다.</p></li>
+</ul>
+<p>티블은 이러한 작동 방식을 비틀었습니다. <code>[</code>는 항상 티블을 반환하고, <code>$</code>는 부분적으로 매칭시키지 않고 만약 변수를 찾을 수 없으면 경고를 해줍니다.(이 부분이 티블을 surly하게 합니다)</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">xyz =</span> <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb101-2" title="2">df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">xyz =</span> <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb101-3" title="3"></a>
+<a class="sourceLine" id="cb101-4" title="4"><span class="kw">str</span>(df1<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb101-5" title="5"><span class="co">#&gt;  Factor w/ 1 level &quot;a&quot;: 1</span></a>
+<a class="sourceLine" id="cb101-6" title="6"><span class="kw">str</span>(df2<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb101-7" title="7"><span class="co">#&gt; Warning: Unknown or uninitialised column: &#39;x&#39;.</span></a>
+<a class="sourceLine" id="cb101-8" title="8"><span class="co">#&gt;  NULL</span></a></code></pre></div>
+<p><code>[</code>에서 데이터 프레임만을 반환하는 티블의 성질 때문에 레거시 코드(<code>df[, "col"]</code>으로 한 열을 추출하는 식)에서 문제가 생기기도 합니다. 만약 열 하나를 원한다면 <code>df[["col"]]</code>을 사용하길 권장드립니다. 이는 의도를 분명히 전달할 수 있고, 데이터 프레임과 티블 둘 다 작동합니다.</p>
+</div>
+<div id="testing-and-coercing" class="section level3">
+<h3><span class="header-section-number">3.6.5</span> Testing and coercing</h3>
+<p>객체가 데이터 프레임이나 티블인 것을 확인하려면, <code>is.data.frame()</code>을 사용하세요.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">is.data.frame</span>(df1)</a>
+<a class="sourceLine" id="cb102-2" title="2"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb102-3" title="3"><span class="kw">is.data.frame</span>(df2)</a>
+<a class="sourceLine" id="cb102-4" title="4"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<p>일반적으로는 티블이든 데이터 프레임이든 문제가 되지 않습니다만, 만약 확실히 해야하는 상황이라면, <code>is_tibble()</code>을 이용하세요.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">is_tibble</span>(df1)</a>
+<a class="sourceLine" id="cb103-2" title="2"><span class="co">#&gt; [1] FALSE</span></a>
+<a class="sourceLine" id="cb103-3" title="3"><span class="kw">is_tibble</span>(df2)</a>
+<a class="sourceLine" id="cb103-4" title="4"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<p><code>as.data.frame()</code>은 데이터 프레임으로, <code>as_tibble()</code>은 티블로 객체를 강제시켜줍니다.</p>
+</div>
+<div id="list-columns" class="section level3">
+<h3><span class="header-section-number">3.6.6</span> List columns</h3>
+<p>데이터 프레임은 백터들의 리스트이기 때문에, 데이터 프레임이 리스트인 열을 갖는 것도 가능합니다. 리스트는 어떤 객체든 담을 수 있기 때문에 이는 매우 유용합니다. 데이터 프레임에 어떤 종류의 객체든 넣을 수 있다는 뜻입니다. 개별 객체가 얼마나 복잡한지는 상관없이, 연관된 객체들을 행에 함께 넣을 수 있습니다. <em>R for Data Science</em>, <a href="http://r4ds.had.co.nz/many-models.html" class="uri">http://r4ds.had.co.nz/many-models.html</a>의 “Many Models” chapter에서 이 응용을 보실 수 있습니다.</p>
+<p>데이터 프레임에서 리스트인 열이 허용되긴 하지만, 데이터 프레임을 만들고나서 리스트 열을 추가하거나, 리스트를 <code>I()</code>로 래핑하는 방식을 이용해 추가적으로 수고해줘야 합니다.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb104-2" title="2">df<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb104-3" title="3"></a>
+<a class="sourceLine" id="cb104-4" title="4"><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb104-5" title="5">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb104-6" title="6">  <span class="dt">y =</span> <span class="kw">I</span>(<span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb104-7" title="7">)</a>
+<a class="sourceLine" id="cb104-8" title="8"><span class="co">#&gt;   x          y</span></a>
+<a class="sourceLine" id="cb104-9" title="9"><span class="co">#&gt; 1 1       1, 2</span></a>
+<a class="sourceLine" id="cb104-10" title="10"><span class="co">#&gt; 2 2    1, 2, 3</span></a>
+<a class="sourceLine" id="cb104-11" title="11"><span class="co">#&gt; 3 3 1, 2, 3, 4</span></a></code></pre></div>
+<p><img src="diagrams/vectors/data-frame-list.png" style="display: block; margin: auto;" /></p>
+<p>리스트 열은 티블과 함께 사용하기 더 쉽습니다. <code>tibble()</code> 내부에 직접 넣을 수 있고, 깔끔하게 출력되기 때문입니다.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb105-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb105-3" title="3">  <span class="dt">y =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb105-4" title="4">)</a>
+<a class="sourceLine" id="cb105-5" title="5"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb105-6" title="6"><span class="co">#&gt;       x y        </span></a>
+<a class="sourceLine" id="cb105-7" title="7"><span class="co">#&gt;   &lt;int&gt; &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb105-8" title="8"><span class="co">#&gt; 1     1 &lt;int [2]&gt;</span></a>
+<a class="sourceLine" id="cb105-9" title="9"><span class="co">#&gt; 2     2 &lt;int [3]&gt;</span></a>
+<a class="sourceLine" id="cb105-10" title="10"><span class="co">#&gt; 3     3 &lt;int [4]&gt;</span></a></code></pre></div>
+</div>
+<div id="matrix-and-data-frame-columns" class="section level3">
+<h3><span class="header-section-number">3.6.7</span> Matrix and data frame columns</h3>
+<p>행 수가 데이터 프레임과 맞기만 하다면, 행렬이나 배열을 데이터 프레임의 열로 갖는 것도 가능합니다.(이는 데이터 프레임에 대한 정의를 조금 더 확장시켜야 합니다: 각 열에 대한 <code>length()</code>가 아닌 <code>NROW()</code>가 일치해야 합니다) 리스트 열과 마찬가지로, 만들고 추가시켜주거나 <code>I()</code>로 래핑해줘야 합니다.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">dfm &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb106-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb106-3" title="3">)</a>
+<a class="sourceLine" id="cb106-4" title="4">dfm<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb106-5" title="5">dfm<span class="op">$</span>z &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb106-6" title="6"></a>
+<a class="sourceLine" id="cb106-7" title="7"><span class="kw">str</span>(dfm)</a>
+<a class="sourceLine" id="cb106-8" title="8"><span class="co">#&gt; &#39;data.frame&#39;:    3 obs. of  3 variables:</span></a>
+<a class="sourceLine" id="cb106-9" title="9"><span class="co">#&gt;  $ x: num  10 20 30</span></a>
+<a class="sourceLine" id="cb106-10" title="10"><span class="co">#&gt;  $ y: int [1:3, 1:3] 1 2 3 4 5 6 7 8 9</span></a>
+<a class="sourceLine" id="cb106-11" title="11"><span class="co">#&gt;  $ z:&#39;data.frame&#39;:   3 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb106-12" title="12"><span class="co">#&gt;   ..$ a: int  3 2 1</span></a>
+<a class="sourceLine" id="cb106-13" title="13"><span class="co">#&gt;   ..$ b: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></a></code></pre></div>
+<p><img src="diagrams/vectors/data-frame-matrix.png" style="display: block; margin: auto;" /></p>
+<p>행렬과 데이터 프레임 열들은 조금 주의해야합니다. 데이터 프레임에 작동하는 많은 함수들은 모든 열들이 벡터인 것을 전제로 합니다. 또한 출력된 화면이 좀 헷갈릴 수 있습니다.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1">dfm[<span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb107-2" title="2"><span class="co">#&gt;    x y.1 y.2 y.3 z.a z.b</span></a>
+<a class="sourceLine" id="cb107-3" title="3"><span class="co">#&gt; 1 10   1   4   7   3   a</span></a></code></pre></div>
+</div>
+<div id="exercises-8" class="section level3">
+<h3><span class="header-section-number">3.6.8</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>행이나 열 수가 0인 데이터 프레임을 만들 수 있습니까?</p></li>
+<li><p>만약 고유하지 않은 행 이름을 설정하려고 시도하면 어떻게 되나요?</p></li>
+<li><p>만약 <code>df</code>가 데이터 프레임이라면 <code>t(df)</code>와 <code>t(t(df))</code>를 어떻게 설명할까요? 여러 열 타입들에 대해서 한 번 실험해 보세요.</p></li>
+<li><p><code>as.matrix()</code>를 서로 다른 타입의 열들을 가진 데이터 프레임에 적용하면 어떻게 되나요? <code>data.matrix()</code>와는 무엇이 다른가요?</p></li>
+</ol>
+</div>
 </div>
 <div id="null" class="section level2">
 <h2><span class="header-section-number">3.7</span> NULL</h2>
+<p>이 Chapter를 마무리하며, 마지막으로 벡터와 연관된 중요한 데이터 구조 하나를 소개하려고 합니다. <code>NULL</code>은 특별합니다. 왜냐하면 얘는 그 자체로 고유한 타입이고, 항상 길이가 0이며, 어떤 속성도 가질 수 없기 때문입니다.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="kw">typeof</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb108-2" title="2"><span class="co">#&gt; [1] &quot;NULL&quot;</span></a>
+<a class="sourceLine" id="cb108-3" title="3"></a>
+<a class="sourceLine" id="cb108-4" title="4"><span class="kw">length</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb108-5" title="5"><span class="co">#&gt; [1] 0</span></a>
+<a class="sourceLine" id="cb108-6" title="6"></a>
+<a class="sourceLine" id="cb108-7" title="7">x &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb108-8" title="8"><span class="kw">attr</span>(x, <span class="st">&quot;y&quot;</span>) &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb108-9" title="9"><span class="co">#&gt; Error in attr(x, &quot;y&quot;) &lt;- 1: NULL 객체에 속성부여를 시도했습니다</span></a></code></pre></div>
+<p><code>is.null()</code>을 이용해서 <code>NULL</code> 테스트를 할 수 있습니다.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1"><span class="kw">is.null</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb109-2" title="2"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<p><code>NULL</code>은 흔히 두 가지로 활용할 수 있습니다.</p>
+<ul>
+<li>임의의 빈 벡터(길이가 0인 벡터)를 표현하기 위해 사용할 수 있습니다. 예를 들어, 어떤 인자도 들어있지 않은 <code>c()</code>를 사용하면 <code>NULL</code>을 얻게 되고, 벡터와 <code>NULL</code>을 결합하면 변화가 일어나지 않습니다.</li>
+</ul>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="kw">c</span>()</a>
+<a class="sourceLine" id="cb110-2" title="2"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<ul>
+<li>누락된 벡터를 표현하기 위해 사용할 수 있습니다. 예를 들면 <code>NULL</code>은 인자가 선택적이지만, 디폴트 값이 연산을 요구할 경우, 함수의 디폴트 인자로 사용되곤 합니다.(Section 6.5.3에서 더 알아봅시다) <code>NA</code>는 벡터의 _원소_가 비어있는 것을 가리킬 때 사용됩니다.</li>
+</ul>
+<p>만약 SQL에 익숙하다면, 관계적인 <code>NULL</code>에 대해 아실텐데, 이는 R의 것과 같을 거라고 예상하실지도 모르겠습니다. 하지만 데이터 베이스에서의 <code>NULL</code>은 R의 <code>NA</code>와 같은 개념입니다.</p>
 </div>
 <div id="quiz-answers-1" class="section level2">
 <h2><span class="header-section-number">3.8</span> Quiz answers</h2>
+<ol style="list-style-type: decimal">
+<li><p>atomic 벡터의 네가지 기본 타입은 논리형, 정수형, 실수형, 문자형입니다. 두가지 희귀 타입은 복소수형과 raw 타입입니다.</p></li>
+<li><p>속성은 어떤 객체에든 임의의 추가적인 메타 데이터를 더할 수 있게 해줍니다. <code>attr(x, "y")</code>과 <code>attr(x, "y") &lt;- value</code>를 이용해서 개별 속성 값에 접근하거나 설정할 수 있습니다. 또는 <code>attribute()</code>로 한 번에 모든 속성값을 얻거나 설정할 수 있습니다.</p></li>
+<li><p>리스트의 원소는 어떤 타입(심지어 리스트도)이든 될 수 있고, atomic 벡터의 원소는 모두 같은 타입이어야 합니다. 유사하게, 행렬의 모든 원소는 같은 타입이어야 하고, 데이터 프레임에서는 각 열들이 다른 타입을 가질 수 있습니다.</p></li>
+<li><p>리스트에 차원을 부여하면 리스트-배열을 만들 수 있습니다. <code>df$x &lt;- matrix()</code>나 <code>data.frame(x = I(matrix()))</code>와 같이 새로운 데이터 프레임을 만들 때 <code>I()</code>를 사용해서, 행렬을 데이터 프레임의 열로 만들 수 있습니다.</p></li>
+<li><p>티블은 향상된 출력 방식을 가지며, 문자열을 팩터로 강제하지 않고, 엄격한 서브세팅 방식을 사용합니다.</p></li>
+</ol>
 </div>
 <div id="summary-1" class="section level2">
 <h2><span class="header-section-number">3.9</span> Summary</h2>
 <ul>
-<li>팩터 = 정수형 벡터 + &lt;factor class + levels&gt;</li>
+<li><p>벡터는 크게 atomic 벡터(same type)와 리스트(no matter)로 구성됨</p></li>
+<li><p>우리가 아는 다른 데이터 구조들은 바로 위의 벡터에 attributes를 추가한 것임</p></li>
+<li><p>Matrix, Array = Vector + &lt; dimensions &gt;</p></li>
+<li><p>Factor = Integer + &lt; factor class, levels &gt;</p></li>
+<li><p>Dataframe = List + &lt; data.frame class, names &gt;</p></li>
+<li><p>Tibble : strings as factors + non-syntactic variable name + recycling rule + varible references</p></li>
+<li><p>NULL : a vector is absent / NA : an element of a vector is absent</p></li>
 </ul>
 
 </div>
